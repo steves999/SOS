@@ -1,8 +1,8 @@
 {
   "person": {
-    "name": "[YOUR FULL NAME]",
+    "name": "STEVE GORE-SMITH",
     "callsign": "ZL1SGS",
-    "dob": "[DD MMM YYYY]",
+    "dob": "02 OCT 1963",
     "nationality": "British / New Zealand"
   },
   "medical": {
@@ -10,7 +10,7 @@
     "allergies": "None known",
     "medications": "None",
     "conditions": "None",
-    "diet": "Vegan — no animal products in treatment"
+    "diet": "Vegan â no animal products in treatment"
   },
   "ice": [
     {
@@ -45,6 +45,9 @@
     "plan": "Trip not yet started. Departing late 2026 for Australia ADV tour."
   },
   "trail": [
-    { "date": "–", "place": "No entries yet" }
+    {
+      "date": "â",
+      "place": "No entries yet"
+    }
   ]
 }
