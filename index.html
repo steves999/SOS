@@ -11,7 +11,6 @@
     --red: #D0021B;
     --red-bg: #FFF5F5;
     --amber: #F5A623;
-    --amber-bg: #FFFBF0;
     --green: #2E7D32;
     --green-bg: #F1F8F1;
     --ink: #1A1A1A;
@@ -32,10 +31,9 @@
     min-height: 100vh;
   }
 
-  /* ── HEADER ── */
   .site-header {
     background: var(--ink);
-    color: var(--white);
+    color: white;
     padding: 14px 20px;
     display: flex;
     align-items: center;
@@ -49,11 +47,7 @@
     letter-spacing: 0.08em;
     color: var(--amber);
   }
-  .header-sub {
-    font-size: 0.75rem;
-    color: #aaa;
-    font-family: var(--mono);
-  }
+  .header-sub { font-size: 0.75rem; color: #aaa; font-family: var(--mono); }
   .sos-badge {
     background: var(--red);
     color: white;
@@ -66,14 +60,8 @@
     flex-shrink: 0;
   }
 
-  /* ── LAYOUT ── */
-  .container {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 16px 48px;
-  }
+  .container { max-width: 680px; margin: 0 auto; padding: 0 16px 48px; }
 
-  /* ── SECTION LABELS ── */
   .section-label {
     font-family: var(--mono);
     font-size: 0.65rem;
@@ -86,7 +74,6 @@
     margin-bottom: 12px;
   }
 
-  /* ── EMERGENCY BLOCK ── */
   .emergency-block {
     background: var(--red-bg);
     border-left: 4px solid var(--red);
@@ -108,15 +95,8 @@
     font-size: 1.3rem;
     font-weight: 700;
     color: var(--ink);
-    line-height: 1.2;
-  }
-  .emergency-block .note {
-    font-size: 0.75rem;
-    color: var(--mid);
-    margin-top: 3px;
   }
 
-  /* ── INFO GRID ── */
   .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -144,22 +124,10 @@
     font-weight: 600;
     color: var(--ink);
   }
-  .info-cell .sub {
-    font-size: 0.72rem;
-    color: var(--mid);
-    margin-top: 2px;
-  }
-  .info-cell.full {
-    grid-column: 1 / -1;
-  }
+  .info-cell .sub { font-size: 0.72rem; color: var(--mid); margin-top: 2px; }
+  .info-cell.full { grid-column: 1 / -1; }
 
-  /* ── ICE CONTACTS ── */
-  .ice-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
+  .ice-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
   .ice-item {
     background: var(--white);
     border: 1px solid var(--rule);
@@ -179,17 +147,11 @@
     text-transform: uppercase;
     margin-bottom: 2px;
   }
-  .ice-item .ice-name {
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-  .ice-item .ice-rel {
-    font-size: 0.75rem;
-    color: var(--mid);
-  }
+  .ice-item .ice-name { font-weight: 600; font-size: 0.95rem; }
+  .ice-item .ice-rel { font-size: 0.75rem; color: var(--mid); }
   .ice-call {
     background: var(--ink);
-    color: var(--white);
+    color: white;
     font-family: var(--mono);
     font-size: 0.85rem;
     font-weight: 600;
@@ -201,7 +163,6 @@
   }
   .ice-call:hover { background: var(--red); }
 
-  /* ── TOURING STATUS ── */
   .status-bar {
     background: var(--green-bg);
     border-left: 4px solid var(--green);
@@ -218,17 +179,8 @@
     text-transform: uppercase;
     margin-bottom: 4px;
   }
-  .status-bar .value {
-    font-family: var(--mono);
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--ink);
-  }
-  .status-bar .updated {
-    font-size: 0.7rem;
-    color: var(--mid);
-    margin-top: 4px;
-  }
+  .status-bar .value { font-family: var(--mono); font-size: 1rem; font-weight: 600; }
+  .status-bar .updated { font-size: 0.7rem; color: var(--mid); margin-top: 4px; }
 
   .plan-block {
     background: var(--white);
@@ -246,18 +198,14 @@
     text-transform: uppercase;
     margin-bottom: 8px;
   }
-  .plan-block .plan-text {
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: var(--ink);
-  }
+  .plan-block .plan-text { font-size: 0.9rem; line-height: 1.55; }
 
-  /* ── TRAIL LOG ── */
   .trail-log {
     background: var(--white);
     border: 1px solid var(--rule);
     border-radius: 4px;
     overflow: hidden;
+    margin-bottom: 10px;
   }
   .trail-log .log-header {
     font-family: var(--mono);
@@ -287,117 +235,9 @@
     flex-shrink: 0;
     min-width: 80px;
   }
-  .trail-entry .trail-place {
-    color: var(--ink);
-    font-weight: 500;
-  }
+  .trail-entry .trail-place { color: var(--ink); font-weight: 500; }
 
-  /* ── UPDATE FORM ── */
-  .update-toggle {
-    margin-top: 32px;
-    text-align: center;
-  }
-  .btn-toggle {
-    background: none;
-    border: 1px solid var(--rule);
-    color: var(--mid);
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    padding: 8px 16px;
-    cursor: pointer;
-    border-radius: 3px;
-    letter-spacing: 0.05em;
-  }
-  .btn-toggle:hover { border-color: var(--ink); color: var(--ink); }
-
-  .update-panel {
-    display: none;
-    margin-top: 16px;
-    background: var(--white);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .update-panel.open { display: block; }
-
-  .update-panel .panel-header {
-    background: var(--ink);
-    color: var(--white);
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 10px 16px;
-  }
-
-  .auth-gate, .update-form-inner {
-    padding: 20px 16px;
-  }
-
-  .field {
-    margin-bottom: 14px;
-  }
-  .field label {
-    display: block;
-    font-family: var(--mono);
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    color: var(--mid);
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
-  .field input, .field textarea {
-    width: 100%;
-    font-family: var(--mono);
-    font-size: 0.85rem;
-    border: 1px solid var(--rule);
-    border-radius: 3px;
-    padding: 8px 10px;
-    color: var(--ink);
-    background: var(--page);
-    outline: none;
-  }
-  .field input:focus, .field textarea:focus {
-    border-color: var(--ink);
-    background: var(--white);
-  }
-  .field textarea { resize: vertical; min-height: 60px; }
-
-  .btn-primary {
-    background: var(--ink);
-    color: var(--white);
-    font-family: var(--mono);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-    width: 100%;
-  }
-  .btn-primary:hover { background: var(--green); }
-
-  .msg-error {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--red);
-    margin-bottom: 10px;
-  }
-  .msg-success {
-    font-family: var(--mono);
-    font-size: 0.75rem;
-    color: var(--green);
-    margin-bottom: 10px;
-  }
-
-  /* ── BIKE DETAILS ── */
-  .bike-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
+  .bike-row { display: flex; gap: 8px; flex-wrap: wrap; }
   .bike-chip {
     font-family: var(--mono);
     font-size: 0.75rem;
@@ -405,10 +245,17 @@
     border: 1px solid var(--rule);
     padding: 4px 10px;
     border-radius: 2px;
-    color: var(--ink);
   }
 
-  /* ── FOOTER ── */
+  .update-note {
+    margin-top: 32px;
+    text-align: center;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: #bbb;
+  }
+  .update-note a { color: #bbb; }
+
   .site-footer {
     text-align: center;
     font-family: var(--mono);
@@ -416,6 +263,8 @@
     color: #bbb;
     padding: 24px 16px 16px;
   }
+
+  .loading { color: var(--mid); font-family: var(--mono); font-size: 0.8rem; padding: 8px 0; }
 
   @media (max-width: 400px) {
     .info-grid { grid-template-columns: 1fr; }
@@ -428,21 +277,19 @@
 
 <header class="site-header">
   <div>
-    <div class="callsign">ZL1SGS · Steve Collier</div>
-    <div class="header-sub">Amateur Radio · ADV Touring</div>
+    <div class="callsign">ZL1SGS · [YOUR NAME]</div>
+    <div class="header-sub">Amateur Radio · ADV Touring · New Zealand</div>
   </div>
   <div class="sos-badge">EMERGENCY INFO</div>
 </header>
 
 <div class="container">
 
-  <!-- ══ EMERGENCY ══ -->
   <div class="section-label">Medical &amp; Emergency</div>
 
   <div class="emergency-block">
     <div class="label">Blood Type</div>
-    <div class="value" id="blood-type">—</div>
-    <div class="note">Update with your actual blood type</div>
+    <div class="value">[BLOOD TYPE]</div>
   </div>
 
   <div class="info-grid">
@@ -453,7 +300,7 @@
     <div class="info-cell">
       <div class="label">Diet</div>
       <div class="value">Vegan</div>
-      <div class="sub">No animal products</div>
+      <div class="sub">No animal products in treatment</div>
     </div>
     <div class="info-cell">
       <div class="label">Medications</div>
@@ -465,7 +312,6 @@
     </div>
   </div>
 
-  <!-- ICE CONTACTS -->
   <div class="section-label">In Case of Emergency</div>
 
   <div class="ice-list">
@@ -487,10 +333,9 @@
     </div>
   </div>
 
-  <!-- BIKE -->
   <div class="section-label">Vehicle</div>
 
-  <div class="info-cell full" style="margin-bottom:10px;">
+  <div class="info-cell full" style="margin-bottom:8px;">
     <div class="label">Motorcycle</div>
     <div class="value" style="margin-bottom:8px;">BMW R1250GSA · [Colour]</div>
     <div class="bike-row">
@@ -503,173 +348,82 @@
   <div class="info-cell full" style="margin-bottom:10px;">
     <div class="label">Satellite Communicator</div>
     <div class="value">Garmin inReach</div>
-    <div class="sub">IMEI: [IMEI] · Contact via: [email/number]</div>
+    <div class="sub">Contact via: [inReach email/number]</div>
   </div>
 
-  <!-- ══ TOURING STATUS ══ -->
+  <!-- ══ TOURING STATUS — loaded from data.json ══ -->
   <div class="section-label">Touring Status</div>
 
   <div class="status-bar">
     <div class="label">Current Location</div>
-    <div class="value" id="current-location">Not yet departed · Auckland, NZ</div>
-    <div class="updated" id="status-updated">–</div>
+    <div class="value" id="current-location"><span class="loading">Loading…</span></div>
+    <div class="updated" id="status-updated"></div>
   </div>
 
   <div class="plan-block">
     <div class="label">This Week's Plan</div>
-    <div class="plan-text" id="weekly-plan">Trip not yet started. Departing late 2026 for Australia ADV tour via R1250GSA.</div>
+    <div class="plan-text" id="weekly-plan"><span class="loading">Loading…</span></div>
   </div>
 
   <div class="trail-log">
     <div class="log-header">Recent Locations</div>
-    <div id="trail-list">
-      <div class="trail-entry">
-        <span class="trail-date">–</span>
-        <span class="trail-place">No entries yet</span>
-      </div>
-    </div>
+    <div id="trail-list"><div class="trail-entry"><span class="loading">Loading…</span></div></div>
   </div>
 
-  <!-- ══ UPDATE PANEL ══ -->
-  <div class="update-toggle">
-    <button class="btn-toggle" onclick="togglePanel()">Update touring status</button>
-  </div>
-
-  <div class="update-panel" id="update-panel">
-    <div class="panel-header">UPDATE · ZL1SGS TOURING STATUS</div>
-
-    <div class="auth-gate" id="auth-gate">
-      <div class="field">
-        <label>Password</label>
-        <input type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPw()">
-      </div>
-      <div class="msg-error" id="pw-error" style="display:none">Incorrect password</div>
-      <button class="btn-primary" onclick="checkPw()">Unlock</button>
-    </div>
-
-    <div class="update-form-inner" id="update-form" style="display:none">
-      <div class="msg-success" id="save-msg" style="display:none">✓ Saved</div>
-
-      <div class="field">
-        <label>Current Location</label>
-        <input type="text" id="f-location" placeholder="e.g. Cairns, QLD">
-      </div>
-      <div class="field">
-        <label>This Week's Plan</label>
-        <textarea id="f-plan" placeholder="e.g. Heading south via Bruce Hwy, stopping at Airlie Beach and Mackay"></textarea>
-      </div>
-      <div class="field">
-        <label>Add to Trail Log (date + place)</label>
-        <input type="text" id="f-trail-date" placeholder="e.g. 15 Jan" style="margin-bottom:6px;">
-        <input type="text" id="f-trail-place" placeholder="e.g. Townsville, QLD">
-      </div>
-      <button class="btn-primary" onclick="saveUpdate()">Save Update</button>
-    </div>
+  <div class="update-note">
+    To update touring status: edit <code>data.json</code> in the
+    <a href="https://github.com" target="_blank">GitHub repo</a> and commit.
+    Live within ~60 seconds.
   </div>
 
 </div>
 
 <div class="site-footer">
-  ZL1SGS · Steve Collier · Auckland, New Zealand<br>
-  This page contains personal emergency information. If found, please scan for context or call ICE contacts above.
+  ZL1SGS · [YOUR NAME] · Auckland, New Zealand<br>
+  This page contains personal emergency information. If found, please call ICE contacts above.
 </div>
 
 <script>
-  // ── CONFIG ──
-  // Change this password before deploying
-  const PASSWORD = 'changeme';
+  // Fetch data.json from same repo (GitHub Pages serves it as a static file)
+  // Add cache-busting so updates show immediately
+  const url = 'data.json?v=' + Date.now();
 
-  // ── STATE ── stored in localStorage for GitHub Pages (no backend)
-  function loadState() {
-    try {
-      return JSON.parse(localStorage.getItem('zl1sgs_touring') || '{}');
-    } catch(e) { return {}; }
-  }
-
-  function saveState(state) {
-    localStorage.setItem('zl1sgs_touring', JSON.stringify(state));
-  }
-
-  function renderState() {
-    const s = loadState();
-
-    if (s.location) {
-      document.getElementById('current-location').textContent = s.location;
-    }
-    if (s.updated) {
-      document.getElementById('status-updated').textContent = 'Updated ' + s.updated;
-    }
-    if (s.plan) {
-      document.getElementById('weekly-plan').textContent = s.plan;
-    }
-    if (s.trail && s.trail.length > 0) {
-      const list = document.getElementById('trail-list');
-      list.innerHTML = '';
-      // Show most recent first, max 10
-      const entries = [...s.trail].reverse().slice(0, 10);
-      entries.forEach(e => {
-        const div = document.createElement('div');
-        div.className = 'trail-entry';
-        div.innerHTML = `<span class="trail-date">${e.date}</span><span class="trail-place">${e.place}</span>`;
-        list.appendChild(div);
-      });
-    }
-  }
-
-  // ── AUTH ──
-  function togglePanel() {
-    const panel = document.getElementById('update-panel');
-    panel.classList.toggle('open');
-  }
-
-  function checkPw() {
-    const pw = document.getElementById('pw-input').value;
-    if (pw === PASSWORD) {
-      document.getElementById('auth-gate').style.display = 'none';
-      document.getElementById('update-form').style.display = 'block';
-      // Populate fields with current state
-      const s = loadState();
-      if (s.location) document.getElementById('f-location').value = s.location;
-      if (s.plan) document.getElementById('f-plan').value = s.plan;
-    } else {
-      document.getElementById('pw-error').style.display = 'block';
-    }
-  }
-
-  // ── SAVE ──
-  function saveUpdate() {
-    const s = loadState();
-    const loc = document.getElementById('f-location').value.trim();
-    const plan = document.getElementById('f-plan').value.trim();
-    const trailDate = document.getElementById('f-trail-date').value.trim();
-    const trailPlace = document.getElementById('f-trail-place').value.trim();
-
-    if (loc) s.location = loc;
-    if (plan) s.plan = plan;
-
-    if (trailDate && trailPlace) {
-      if (!s.trail) s.trail = [];
-      s.trail.push({ date: trailDate, place: trailPlace });
-      document.getElementById('f-trail-date').value = '';
-      document.getElementById('f-trail-place').value = '';
-    }
-
-    const now = new Date();
-    s.updated = now.toLocaleDateString('en-NZ', {
-      day: 'numeric', month: 'short', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
+  fetch(url)
+    .then(r => {
+      if (!r.ok) throw new Error('No data');
+      return r.json();
+    })
+    .then(data => {
+      // Location
+      if (data.status && data.status.location) {
+        document.getElementById('current-location').textContent = data.status.location;
+      }
+      // Updated
+      if (data.status && data.status.updated) {
+        document.getElementById('status-updated').textContent = 'Updated ' + data.status.updated;
+      }
+      // Plan
+      if (data.status && data.status.plan) {
+        document.getElementById('weekly-plan').textContent = data.status.plan;
+      }
+      // Trail
+      if (data.trail && data.trail.length > 0) {
+        const list = document.getElementById('trail-list');
+        list.innerHTML = '';
+        // Most recent first, max 10
+        const entries = [...data.trail].reverse().slice(0, 10);
+        entries.forEach(e => {
+          const div = document.createElement('div');
+          div.className = 'trail-entry';
+          div.innerHTML = `<span class="trail-date">${e.date}</span><span class="trail-place">${e.place}</span>`;
+          list.appendChild(div);
+        });
+      }
+    })
+    .catch(() => {
+      document.getElementById('current-location').textContent = 'Status unavailable';
+      document.getElementById('weekly-plan').textContent = '—';
     });
-
-    saveState(s);
-    renderState();
-
-    const msg = document.getElementById('save-msg');
-    msg.style.display = 'block';
-    setTimeout(() => msg.style.display = 'none', 2500);
-  }
-
-  // ── INIT ──
-  renderState();
 </script>
 </body>
 </html>
