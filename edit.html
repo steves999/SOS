@@ -196,24 +196,9 @@
 
   <!-- CONTACTS -->
   <div class="tab-panel" id="tab-contacts">
-    <div class="section-label">ICE Contact 1</div>
-    <div class="row2">
-      <div class="field"><label>Name</label><input type="text" id="f-ice1-name"></div>
-      <div class="field"><label>Relationship</label><input type="text" id="f-ice1-rel"></div>
-    </div>
-    <div class="row2">
-      <div class="field"><label>Location</label><input type="text" id="f-ice1-loc"></div>
-      <div class="field"><label>Phone (intl format)</label><input type="text" id="f-ice1-phone" placeholder="+64XXXXXXXXX"></div>
-    </div>
-    <div class="section-label">ICE Contact 2</div>
-    <div class="row2">
-      <div class="field"><label>Name</label><input type="text" id="f-ice2-name"></div>
-      <div class="field"><label>Relationship</label><input type="text" id="f-ice2-rel"></div>
-    </div>
-    <div class="row2">
-      <div class="field"><label>Location</label><input type="text" id="f-ice2-loc"></div>
-      <div class="field"><label>Phone (intl format)</label><input type="text" id="f-ice2-phone"></div>
-    </div>
+    <div class="section-label">ICE Contacts</div>
+    <div id="ice-blocks"></div>
+    <button class="btn-add" onclick="addIceBlock()">+ Add ICE contact</button>
   </div>
 
   <!-- VEHICLE -->
@@ -263,10 +248,33 @@
   const GITHUB_BRANCH = 'main';
 
   // !! Change this password before deploying !!
-  const EDITOR_PASSWORD = 'puffinkayak';
+  const EDITOR_PASSWORD = 'changeme';
 
   let currentSha = null;
   let rowCount = 0;
+  let iceCount = 0;
+
+  function addIceBlock(c={}) {
+    iceCount++;
+    const id = 'ice-' + iceCount;
+    const div = document.createElement('div');
+    div.className = 'ice-block'; div.id = id;
+    div.style.cssText = 'background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:14px;margin-bottom:10px;';
+    div.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <span style="font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--red);text-transform:uppercase;">ICE ${iceCount}</span>
+        <button class="btn-remove" onclick="document.getElementById('${id}').remove()" title="Remove">× Remove</button>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Name</label><input type="text" class="ic-name" value="${esc(c.name||'')}" placeholder="Full name"></div>
+        <div class="field"><label>Relationship</label><input type="text" class="ic-rel" value="${esc(c.relationship||'')}" placeholder="e.g. Partner"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Location</label><input type="text" class="ic-loc" value="${esc(c.location||'')}" placeholder="e.g. Auckland, NZ"></div>
+        <div class="field"><label>Phone (intl format)</label><input type="text" class="ic-phone" value="${esc(c.phone||'')}" placeholder="+64XXXXXXXXX"></div>
+      </div>`;
+    document.getElementById('ice-blocks').appendChild(div);
+  }
 
   // ── LOGIN ──
   function checkLogin() {
@@ -377,8 +385,9 @@
     if (d.person)  { set('f-name',d.person.name); set('f-callsign',d.person.callsign); set('f-dob',d.person.dob); set('f-nationality',d.person.nationality); }
     if (d.medical) { set('f-blood',d.medical.blood_type); set('f-allergies',d.medical.allergies); set('f-medications',d.medical.medications); set('f-conditions',d.medical.conditions); set('f-diet',d.medical.diet); }
     if (d.ice) {
-      if(d.ice[0]){set('f-ice1-name',d.ice[0].name);set('f-ice1-rel',d.ice[0].relationship);set('f-ice1-loc',d.ice[0].location);set('f-ice1-phone',d.ice[0].phone);}
-      if(d.ice[1]){set('f-ice2-name',d.ice[1].name);set('f-ice2-rel',d.ice[1].relationship);set('f-ice2-loc',d.ice[1].location);set('f-ice2-phone',d.ice[1].phone);}
+      document.getElementById('ice-blocks').innerHTML = ''; iceCount = 0;
+      if (d.ice && d.ice.length) d.ice.forEach(c => addIceBlock(c));
+      else addIceBlock();
     }
     if (d.vehicle) { set('f-make',d.vehicle.make_model); set('f-colour',d.vehicle.colour); set('f-rego',d.vehicle.rego); set('f-insurer',d.vehicle.insurer); set('f-policy',d.vehicle.policy); }
     if (d.comms)   { set('f-inreach-contact',d.comms.inreach_contact); set('f-inreach-imei',d.comms.inreach_imei); }
@@ -398,8 +407,19 @@
     return {
       person:   {name:v('f-name'),callsign:v('f-callsign'),dob:v('f-dob'),nationality:v('f-nationality')},
       medical:  {blood_type:v('f-blood'),allergies:v('f-allergies'),medications:v('f-medications'),conditions:v('f-conditions'),diet:v('f-diet')},
-      ice:      [{label:'ICE 1',name:v('f-ice1-name'),relationship:v('f-ice1-rel'),location:v('f-ice1-loc'),phone:v('f-ice1-phone')},
-                 {label:'ICE 2',name:v('f-ice2-name'),relationship:v('f-ice2-rel'),location:v('f-ice2-loc'),phone:v('f-ice2-phone')}],
+      ice: (()=>{
+        const contacts=[];
+        document.querySelectorAll('.ice-block').forEach((b,i)=>{
+          contacts.push({
+            label:'ICE '+(i+1),
+            name:b.querySelector('.ic-name').value.trim(),
+            relationship:b.querySelector('.ic-rel').value.trim(),
+            location:b.querySelector('.ic-loc').value.trim(),
+            phone:b.querySelector('.ic-phone').value.trim()
+          });
+        });
+        return contacts;
+      })(),
       vehicle:  {make_model:v('f-make'),colour:v('f-colour'),rego:v('f-rego'),insurer:v('f-insurer'),policy:v('f-policy')},
       comms:    {inreach_contact:v('f-inreach-contact'),inreach_imei:v('f-inreach-imei')},
       status:   {location:v('f-location'),updated:v('f-updated'),plan:v('f-plan')},
