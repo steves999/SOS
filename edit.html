@@ -13,15 +13,64 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:var(--sans);background:var(--page);color:var(--ink);min-height:100vh;}
-  .site-header{background:var(--ink);color:white;padding:14px 20px;}
+  .site-header{background:var(--ink);color:white;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .callsign{font-family:var(--mono);font-size:1rem;font-weight:700;letter-spacing:.08em;color:var(--amber);}
   .header-sub{font-size:.7rem;color:#aaa;font-family:var(--mono);margin-top:2px;}
+  .header-right{display:flex;align-items:center;gap:8px;}
+  .token-status{font-family:var(--mono);font-size:.65rem;color:#aaa;}
+  .token-status.ok{color:#7EC8A4;}
+
+  /* ── LOGIN SCREEN ── */
+  #login-screen{
+    display:flex;align-items:center;justify-content:center;
+    min-height:calc(100vh - 57px);padding:24px;
+  }
+  .login-box{
+    background:var(--white);border:1px solid var(--rule);border-radius:6px;
+    padding:32px 28px;width:100%;max-width:340px;
+  }
+  .login-box .title{
+    font-family:var(--mono);font-size:.75rem;font-weight:700;letter-spacing:.15em;
+    text-transform:uppercase;color:var(--mid);margin-bottom:20px;
+  }
+  .login-box input{
+    width:100%;font-family:var(--mono);font-size:1rem;border:1px solid var(--rule);
+    border-radius:3px;padding:10px 12px;color:var(--ink);background:var(--page);
+    outline:none;margin-bottom:10px;
+  }
+  .login-box input:focus{border-color:var(--ink);background:var(--white);}
+  .btn-login{
+    width:100%;background:var(--ink);color:white;font-family:var(--mono);font-size:.85rem;
+    font-weight:700;padding:11px;border:none;border-radius:3px;cursor:pointer;
+  }
+  .btn-login:hover{background:var(--green);}
+  .login-error{
+    font-family:var(--mono);font-size:.72rem;color:var(--red);
+    margin-top:8px;display:none;text-align:center;
+  }
+  .login-hint{font-size:.72rem;color:var(--mid);margin-top:12px;text-align:center;line-height:1.5;}
+
+  /* ── EDITOR (hidden until logged in) ── */
+  #editor-screen{display:none;}
+
   .container{max-width:640px;margin:0 auto;padding:16px 16px 60px;}
 
-  /* tabs */
-  .tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid var(--ink);padding-bottom:0;}
-  .tab{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-    padding:8px 14px;cursor:pointer;border:none;background:none;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;}
+  .token-banner{background:#1a1a2e;border-left:4px solid var(--amber);padding:14px 16px;
+    border-radius:0 4px 4px 0;margin-bottom:16px;display:none;}
+  .token-banner.show{display:block;}
+  .token-banner p{font-size:.82rem;color:#ccc;line-height:1.5;margin-bottom:10px;}
+  .token-banner a{color:var(--amber);}
+  .token-row{display:flex;gap:8px;}
+  .token-row input{flex:1;font-family:var(--mono);font-size:.8rem;border:1px solid #444;
+    border-radius:3px;padding:8px 10px;color:white;background:#2a2a3e;outline:none;}
+  .token-row input:focus{border-color:var(--amber);}
+  .btn-save-token{background:var(--amber);color:var(--ink);font-family:var(--mono);font-size:.78rem;
+    font-weight:700;padding:8px 14px;border:none;border-radius:3px;cursor:pointer;white-space:nowrap;}
+
+  .tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid var(--ink);padding-bottom:0;overflow-x:auto;}
+  .tab{font-family:var(--mono);font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:8px 12px;cursor:pointer;border:none;background:none;color:var(--mid);
+    border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;}
   .tab.active{color:var(--ink);border-bottom-color:var(--ink);}
   .tab-panel{display:none;}
   .tab-panel.active{display:block;}
@@ -35,16 +84,8 @@
     border:1px solid var(--rule);border-radius:3px;padding:8px 10px;color:var(--ink);background:var(--white);outline:none;}
   .field input:focus,.field textarea:focus{border-color:var(--ink);}
   .field textarea{resize:vertical;min-height:65px;}
-  .field .hint{font-size:.68rem;color:var(--mid);margin-top:3px;}
-
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
 
-  /* ICE blocks */
-  .ice-block{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:14px;margin-bottom:10px;}
-  .ice-block-title{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.12em;
-    color:var(--red);text-transform:uppercase;margin-bottom:10px;}
-
-  /* trail */
   .trail-rows{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
   .trail-row{display:grid;grid-template-columns:110px 1fr 32px;gap:6px;align-items:center;}
   .trail-row input{font-family:var(--mono);font-size:.82rem;border:1px solid var(--rule);
@@ -53,36 +94,30 @@
   .btn-remove{background:none;border:1px solid var(--rule);color:var(--mid);
     font-size:1rem;border-radius:3px;cursor:pointer;padding:3px 8px;line-height:1;}
   .btn-remove:hover{border-color:var(--red);color:var(--red);}
-  .btn-add{background:none;border:1px dashed var(--rule);color:var(--mid);
-    font-family:var(--mono);font-size:.75rem;padding:7px 14px;border-radius:3px;
-    cursor:pointer;width:100%;margin-bottom:12px;}
+  .btn-add{background:none;border:1px dashed var(--rule);color:var(--mid);font-family:var(--mono);
+    font-size:.75rem;padding:7px 14px;border-radius:3px;cursor:pointer;width:100%;margin-bottom:12px;}
   .btn-add:hover{border-color:var(--ink);color:var(--ink);}
 
-  /* buttons */
-  .btn-primary{background:var(--ink);color:white;font-family:var(--mono);font-size:.85rem;
-    font-weight:700;padding:12px 20px;border:none;border-radius:3px;cursor:pointer;width:100%;margin-bottom:8px;}
-  .btn-primary:hover{background:var(--green);}
+  .save-bar{position:sticky;bottom:0;background:var(--page);border-top:1px solid var(--rule);
+    padding:12px 0;margin-top:24px;display:flex;gap:8px;align-items:center;}
+  .btn-save{background:var(--ink);color:white;font-family:var(--mono);font-size:.85rem;
+    font-weight:700;padding:11px 24px;border:none;border-radius:3px;cursor:pointer;flex:1;}
+  .btn-save:hover{background:var(--green);}
+  .btn-save:disabled{background:#999;cursor:not-allowed;}
+  .save-status{font-family:var(--mono);font-size:.75rem;color:var(--mid);flex:1;text-align:right;}
+  .save-status.ok{color:var(--green);}
+  .save-status.err{color:var(--red);}
+  .save-status.saving{color:var(--amber);}
+
   .btn-today{font-family:var(--mono);font-size:.68rem;background:var(--page);
     border:1px solid var(--rule);border-radius:2px;padding:2px 7px;cursor:pointer;margin-left:8px;color:var(--mid);}
   .btn-today:hover{border-color:var(--ink);color:var(--ink);}
-
-  /* output */
-  .output{display:none;margin-top:20px;}
-  .output.visible{display:block;}
-  .instructions{background:var(--green-bg);border-left:4px solid var(--green);
-    padding:12px 14px;border-radius:0 4px 4px 0;font-size:.8rem;line-height:1.6;margin-bottom:10px;}
-  .instructions ol{padding-left:18px;}
-  .instructions li{margin-bottom:2px;}
-  .json-preview{background:var(--ink);color:#7EC8A4;font-family:var(--mono);font-size:.75rem;
-    padding:14px;border-radius:4px;white-space:pre;overflow-x:auto;line-height:1.6;margin-bottom:8px;}
-  .btn-copy{background:var(--green);color:white;font-family:var(--mono);font-size:.82rem;
-    font-weight:700;padding:11px 20px;border:none;border-radius:3px;cursor:pointer;width:100%;margin-bottom:6px;}
-  .btn-copy:hover{opacity:.9;}
-  .btn-github{background:#24292F;color:white;font-family:var(--mono);font-size:.82rem;
-    font-weight:600;padding:11px 20px;border:none;border-radius:3px;cursor:pointer;
-    width:100%;text-decoration:none;display:block;text-align:center;}
-  .btn-github:hover{background:#444;}
-  .copied{display:none;font-family:var(--mono);font-size:.72rem;color:var(--green);text-align:center;padding:4px;}
+  .view-link{font-family:var(--mono);font-size:.7rem;color:var(--mid);text-decoration:none;
+    padding:8px 12px;border:1px solid var(--rule);border-radius:3px;}
+  .view-link:hover{border-color:var(--ink);color:var(--ink);}
+  .btn-logout{background:none;border:1px solid #444;color:#aaa;font-family:var(--mono);
+    font-size:.65rem;padding:4px 10px;border-radius:3px;cursor:pointer;}
+  .btn-logout:hover{border-color:var(--red);color:var(--red);}
 
   @media(max-width:400px){.row2{grid-template-columns:1fr;}}
 </style>
@@ -90,165 +125,218 @@
 <body>
 
 <header class="site-header">
-  <div class="callsign">ZL1SGS · Page Editor</div>
-  <div class="header-sub">All changes go into data.json — commit to go live</div>
+  <div>
+    <div class="callsign">ZL1SGS · Page Editor</div>
+    <div class="header-sub">Saves directly to GitHub</div>
+  </div>
+  <div class="header-right">
+    <span class="token-status" id="token-status"></span>
+    <button class="btn-logout" id="btn-logout" onclick="logout()" style="display:none">Lock</button>
+  </div>
 </header>
 
+<!-- ══ LOGIN ══ -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="title">ZL1SGS · Editor Login</div>
+    <input type="password" id="pw-input" placeholder="Password"
+      onkeydown="if(event.key==='Enter')checkLogin()">
+    <button class="btn-login" onclick="checkLogin()">Unlock Editor</button>
+    <div class="login-error" id="login-error">Incorrect password</div>
+    <div class="login-hint">Emergency info page is always public.<br>This editor requires a password.</div>
+  </div>
+</div>
+
+<!-- ══ EDITOR ══ -->
+<div id="editor-screen">
 <div class="container">
 
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('touring')">Touring</button>
-    <button class="tab" onclick="switchTab('medical')">Medical</button>
-    <button class="tab" onclick="switchTab('contacts')">Contacts</button>
-    <button class="tab" onclick="switchTab('vehicle')">Vehicle</button>
-    <button class="tab" onclick="switchTab('personal')">Personal</button>
+  <div class="token-banner" id="token-banner">
+    <p>First-time setup: enter a GitHub Personal Access Token with <strong>repo</strong> scope.<br>
+    <a href="https://github.com/settings/tokens/new?scopes=repo&description=ZL1SGS+SOS+Editor" target="_blank">
+      Generate one here →</a> (set expiry to 1 year or No expiration)<br>
+    Stored only in this browser's localStorage.</p>
+    <div class="token-row">
+      <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      <button class="btn-save-token" onclick="saveToken()">Save Token</button>
+    </div>
   </div>
 
-  <!-- ══ TOURING ══ -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('touring',this)">Touring</button>
+    <button class="tab" onclick="switchTab('medical',this)">Medical</button>
+    <button class="tab" onclick="switchTab('contacts',this)">Contacts</button>
+    <button class="tab" onclick="switchTab('vehicle',this)">Vehicle</button>
+    <button class="tab" onclick="switchTab('personal',this)">Personal</button>
+  </div>
+
+  <!-- TOURING -->
   <div class="tab-panel active" id="tab-touring">
     <div class="section-label">Current Status</div>
-    <div class="field">
-      <label>Current Location</label>
-      <input type="text" id="f-location" placeholder="e.g. Cairns, QLD">
-    </div>
+    <div class="field"><label>Current Location</label><input type="text" id="f-location" placeholder="e.g. Cairns, QLD"></div>
     <div class="field">
       <label>Last Updated <button class="btn-today" onclick="setToday()">Today</button></label>
       <input type="text" id="f-updated" placeholder="e.g. 15 Jan 2027">
     </div>
-    <div class="field">
-      <label>This Week's Plan</label>
-      <textarea id="f-plan" placeholder="e.g. Heading south via Bruce Hwy, stopping Airlie Beach and Mackay"></textarea>
-    </div>
-
+    <div class="field"><label>This Week's Plan</label><textarea id="f-plan" placeholder="e.g. Heading south via Bruce Hwy"></textarea></div>
     <div class="section-label">Trail Log <span style="font-weight:400;letter-spacing:0">(oldest first)</span></div>
     <div class="trail-rows" id="trail-rows"></div>
     <button class="btn-add" onclick="addTrailRow()">+ Add location</button>
   </div>
 
-  <!-- ══ MEDICAL ══ -->
+  <!-- MEDICAL -->
   <div class="tab-panel" id="tab-medical">
     <div class="section-label">Medical Information</div>
-    <div class="field">
-      <label>Blood Type</label>
-      <input type="text" id="f-blood" placeholder="e.g. O+">
-    </div>
-    <div class="field">
-      <label>Allergies</label>
-      <input type="text" id="f-allergies" placeholder="e.g. None known / Penicillin">
-    </div>
-    <div class="field">
-      <label>Medications</label>
-      <input type="text" id="f-medications" placeholder="e.g. None">
-    </div>
-    <div class="field">
-      <label>Medical Conditions</label>
-      <input type="text" id="f-conditions" placeholder="e.g. None">
-    </div>
-    <div class="field">
-      <label>Diet / Treatment Notes</label>
-      <input type="text" id="f-diet" placeholder="e.g. Vegan — no animal products in treatment">
-    </div>
+    <div class="field"><label>Blood Type</label><input type="text" id="f-blood" placeholder="e.g. O+"></div>
+    <div class="field"><label>Allergies</label><input type="text" id="f-allergies"></div>
+    <div class="field"><label>Medications</label><input type="text" id="f-medications"></div>
+    <div class="field"><label>Medical Conditions</label><input type="text" id="f-conditions"></div>
+    <div class="field"><label>Diet / Treatment Notes</label><input type="text" id="f-diet"></div>
   </div>
 
-  <!-- ══ CONTACTS ══ -->
+  <!-- CONTACTS -->
   <div class="tab-panel" id="tab-contacts">
     <div class="section-label">ICE Contact 1</div>
-    <div class="ice-block">
-      <div class="row2">
-        <div class="field"><label>Name</label><input type="text" id="f-ice1-name" placeholder="Full name"></div>
-        <div class="field"><label>Relationship</label><input type="text" id="f-ice1-rel" placeholder="e.g. Partner"></div>
-      </div>
-      <div class="row2">
-        <div class="field"><label>Location</label><input type="text" id="f-ice1-loc" placeholder="e.g. Auckland, NZ"></div>
-        <div class="field"><label>Phone (intl format)</label><input type="text" id="f-ice1-phone" placeholder="+64XXXXXXXXX"></div>
-      </div>
+    <div class="row2">
+      <div class="field"><label>Name</label><input type="text" id="f-ice1-name"></div>
+      <div class="field"><label>Relationship</label><input type="text" id="f-ice1-rel"></div>
     </div>
-
+    <div class="row2">
+      <div class="field"><label>Location</label><input type="text" id="f-ice1-loc"></div>
+      <div class="field"><label>Phone (intl format)</label><input type="text" id="f-ice1-phone" placeholder="+64XXXXXXXXX"></div>
+    </div>
     <div class="section-label">ICE Contact 2</div>
-    <div class="ice-block">
-      <div class="row2">
-        <div class="field"><label>Name</label><input type="text" id="f-ice2-name" placeholder="Full name"></div>
-        <div class="field"><label>Relationship</label><input type="text" id="f-ice2-rel" placeholder="e.g. Brother"></div>
-      </div>
-      <div class="row2">
-        <div class="field"><label>Location</label><input type="text" id="f-ice2-loc" placeholder="e.g. London, UK"></div>
-        <div class="field"><label>Phone (intl format)</label><input type="text" id="f-ice2-phone" placeholder="+44XXXXXXXXXX"></div>
-      </div>
+    <div class="row2">
+      <div class="field"><label>Name</label><input type="text" id="f-ice2-name"></div>
+      <div class="field"><label>Relationship</label><input type="text" id="f-ice2-rel"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Location</label><input type="text" id="f-ice2-loc"></div>
+      <div class="field"><label>Phone (intl format)</label><input type="text" id="f-ice2-phone"></div>
     </div>
   </div>
 
-  <!-- ══ VEHICLE ══ -->
+  <!-- VEHICLE -->
   <div class="tab-panel" id="tab-vehicle">
     <div class="section-label">Motorcycle</div>
     <div class="row2">
-      <div class="field"><label>Make &amp; Model</label><input type="text" id="f-make" placeholder="e.g. BMW R1250GSA"></div>
-      <div class="field"><label>Colour</label><input type="text" id="f-colour" placeholder="e.g. Kalamata"></div>
+      <div class="field"><label>Make &amp; Model</label><input type="text" id="f-make"></div>
+      <div class="field"><label>Colour</label><input type="text" id="f-colour"></div>
     </div>
     <div class="row2">
-      <div class="field"><label>Registration</label><input type="text" id="f-rego" placeholder="e.g. ABC123"></div>
-      <div class="field"><label>Insurer</label><input type="text" id="f-insurer" placeholder="e.g. NRMA"></div>
+      <div class="field"><label>Registration</label><input type="text" id="f-rego"></div>
+      <div class="field"><label>Insurer</label><input type="text" id="f-insurer"></div>
     </div>
-    <div class="field"><label>Policy Number</label><input type="text" id="f-policy" placeholder="Policy number"></div>
-
+    <div class="field"><label>Policy Number</label><input type="text" id="f-policy"></div>
     <div class="section-label">Satellite Communicator</div>
-    <div class="field"><label>inReach Contact</label><input type="text" id="f-inreach-contact" placeholder="e.g. email or phone"></div>
-    <div class="field"><label>inReach IMEI</label><input type="text" id="f-inreach-imei" placeholder="IMEI number"></div>
+    <div class="field"><label>inReach Contact</label><input type="text" id="f-inreach-contact"></div>
+    <div class="field"><label>inReach IMEI</label><input type="text" id="f-inreach-imei"></div>
   </div>
 
-  <!-- ══ PERSONAL ══ -->
+  <!-- PERSONAL -->
   <div class="tab-panel" id="tab-personal">
     <div class="section-label">Personal Details</div>
     <div class="row2">
-      <div class="field"><label>Full Name</label><input type="text" id="f-name" placeholder="Legal name"></div>
-      <div class="field"><label>Callsign</label><input type="text" id="f-callsign" placeholder="e.g. ZL1SGS"></div>
+      <div class="field"><label>Full Name</label><input type="text" id="f-name"></div>
+      <div class="field"><label>Callsign</label><input type="text" id="f-callsign"></div>
     </div>
     <div class="row2">
       <div class="field"><label>Date of Birth</label><input type="text" id="f-dob" placeholder="DD MMM YYYY"></div>
-      <div class="field"><label>Nationality</label><input type="text" id="f-nationality" placeholder="e.g. British / New Zealand"></div>
+      <div class="field"><label>Nationality</label><input type="text" id="f-nationality"></div>
     </div>
   </div>
 
-  <!-- ══ GENERATE ══ -->
-  <div style="margin-top:24px;">
-    <button class="btn-primary" onclick="generate()">Generate data.json</button>
-  </div>
-
-  <!-- ══ OUTPUT ══ -->
-  <div class="output" id="output">
-    <div class="instructions">
-      <ol>
-        <li>Copy the JSON below</li>
-        <li>Click <strong>Open data.json on GitHub</strong></li>
-        <li>Select all text, paste, commit</li>
-        <li>Live in ~60 seconds ✓</li>
-      </ol>
-    </div>
-    <div class="json-preview" id="json-out"></div>
-    <button class="btn-copy" onclick="copyJson()">Copy JSON</button>
-    <div class="copied" id="copied-msg">✓ Copied</div>
-    <a class="btn-github" href="https://github.com/steves999/SOS/edit/main/data.json" target="_blank">
-      Open data.json on GitHub →
-    </a>
+  <div class="save-bar">
+    <button class="btn-save" id="btn-save" onclick="saveToGitHub()">Save to GitHub</button>
+    <a class="view-link" href="index.html" target="_blank">View page →</a>
+    <div class="save-status" id="save-status"></div>
   </div>
 
 </div>
+</div>
 
 <script>
-  const GITHUB_URL = 'https://github.com/steves999/SOS/edit/main/data.json';
+  // ── CONFIG ──
+  const GITHUB_USER   = 'steves999';
+  const GITHUB_REPO   = 'SOS';
+  const GITHUB_FILE   = 'data.json';
+  const GITHUB_BRANCH = 'main';
+
+  // !! Change this password before deploying !!
+  const EDITOR_PASSWORD = 'puffinkayak';
+
+  let currentSha = null;
   let rowCount = 0;
 
+  // ── LOGIN ──
+  function checkLogin() {
+    const pw = document.getElementById('pw-input').value;
+    if (pw === EDITOR_PASSWORD) {
+      sessionStorage.setItem('zl1sgs_auth', '1');
+      showEditor();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  }
+
+  function showEditor() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('editor-screen').style.display = 'block';
+    document.getElementById('btn-logout').style.display = 'block';
+    checkToken();
+    loadData();
+  }
+
+  function logout() {
+    sessionStorage.removeItem('zl1sgs_auth');
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('editor-screen').style.display = 'none';
+    document.getElementById('btn-logout').style.display = 'none';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('token-status').textContent = '';
+  }
+
+  // Auto-unlock if already authenticated this session
+  if (sessionStorage.getItem('zl1sgs_auth') === '1') showEditor();
+  else document.getElementById('pw-input').focus();
+
+  // ── TOKEN ──
+  function getToken() { return localStorage.getItem('zl1sgs_gh_token') || ''; }
+
+  function saveToken() {
+    const t = document.getElementById('token-input').value.trim();
+    if (!t) return;
+    localStorage.setItem('zl1sgs_gh_token', t);
+    document.getElementById('token-banner').classList.remove('show');
+    document.getElementById('token-status').textContent = '✓ Token saved';
+    document.getElementById('token-status').className = 'token-status ok';
+    loadData();
+  }
+
+  function checkToken() {
+    if (!getToken()) {
+      document.getElementById('token-banner').classList.add('show');
+      document.getElementById('token-status').textContent = 'No token';
+    } else {
+      document.getElementById('token-status').textContent = '✓ Token ready';
+      document.getElementById('token-status').className = 'token-status ok';
+    }
+  }
+
   // ── TABS ──
-  function switchTab(name) {
+  function switchTab(name, el) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.getElementById('tab-' + name).classList.add('active');
-    event.target.classList.add('active');
+    el.classList.add('active');
   }
 
   // ── TODAY ──
   function setToday() {
     document.getElementById('f-updated').value = new Date().toLocaleDateString('en-NZ',
-      {day:'numeric',month:'short',year:'numeric'});
+      {day:'numeric', month:'short', year:'numeric'});
   }
 
   // ── TRAIL ──
@@ -258,132 +346,96 @@
     const div = document.createElement('div');
     div.className = 'trail-row'; div.id = id;
     div.innerHTML = `
-      <input type="text" placeholder="e.g. 15 Jan" value="${date}" class="td">
-      <input type="text" placeholder="e.g. Townsville, QLD" value="${place}" class="tp">
+      <input type="text" placeholder="e.g. 15 Jan" value="${esc(date)}" class="td">
+      <input type="text" placeholder="e.g. Townsville, QLD" value="${esc(place)}" class="tp">
       <button class="btn-remove" onclick="document.getElementById('${id}').remove()">×</button>`;
     document.getElementById('trail-rows').appendChild(div);
   }
 
-  // ── LOAD existing data.json ──
-  fetch('data.json?v=' + Date.now())
-    .then(r => r.json())
-    .then(d => {
-      if (d.person) {
-        set('f-name', d.person.name);
-        set('f-callsign', d.person.callsign);
-        set('f-dob', d.person.dob);
-        set('f-nationality', d.person.nationality);
-      }
-      if (d.medical) {
-        set('f-blood', d.medical.blood_type);
-        set('f-allergies', d.medical.allergies);
-        set('f-medications', d.medical.medications);
-        set('f-conditions', d.medical.conditions);
-        set('f-diet', d.medical.diet);
-      }
-      if (d.ice && d.ice[0]) {
-        set('f-ice1-name', d.ice[0].name);
-        set('f-ice1-rel', d.ice[0].relationship);
-        set('f-ice1-loc', d.ice[0].location);
-        set('f-ice1-phone', d.ice[0].phone);
-      }
-      if (d.ice && d.ice[1]) {
-        set('f-ice2-name', d.ice[1].name);
-        set('f-ice2-rel', d.ice[1].relationship);
-        set('f-ice2-loc', d.ice[1].location);
-        set('f-ice2-phone', d.ice[1].phone);
-      }
-      if (d.vehicle) {
-        set('f-make', d.vehicle.make_model);
-        set('f-colour', d.vehicle.colour);
-        set('f-rego', d.vehicle.rego);
-        set('f-insurer', d.vehicle.insurer);
-        set('f-policy', d.vehicle.policy);
-      }
-      if (d.comms) {
-        set('f-inreach-contact', d.comms.inreach_contact);
-        set('f-inreach-imei', d.comms.inreach_imei);
-      }
-      if (d.status) {
-        set('f-location', d.status.location);
-        set('f-updated', d.status.updated);
-        set('f-plan', d.status.plan);
-      }
-      if (d.trail && d.trail.length) {
-        d.trail.forEach(e => addTrailRow(e.date, e.place));
-      } else { addTrailRow(); }
+  function esc(s) { return (s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  // ── LOAD ──
+  function loadData() {
+    const token = getToken();
+    if (!token) return;
+    setStatus('Loading…', '');
+    fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE}?ref=${GITHUB_BRANCH}`, {
+      headers: {'Authorization':'token '+token, 'Accept':'application/vnd.github.v3+json'}
     })
-    .catch(() => addTrailRow());
-
-  function set(id, val) {
-    const el = document.getElementById(id);
-    if (el && val) el.value = val;
+    .then(r => r.json())
+    .then(res => {
+      currentSha = res.sha;
+      populate(JSON.parse(atob(res.content.replace(/\n/g,''))));
+      setStatus('Loaded ✓', 'ok');
+    })
+    .catch(() => {
+      fetch('data.json?v=' + Date.now()).then(r=>r.json()).then(d=>{populate(d);setStatus('Loaded (no SHA)', 'err');}).catch(()=>setStatus('Load failed','err'));
+    });
   }
 
-  // ── GENERATE ──
-  function generate() {
+  function populate(d) {
+    if (d.person)  { set('f-name',d.person.name); set('f-callsign',d.person.callsign); set('f-dob',d.person.dob); set('f-nationality',d.person.nationality); }
+    if (d.medical) { set('f-blood',d.medical.blood_type); set('f-allergies',d.medical.allergies); set('f-medications',d.medical.medications); set('f-conditions',d.medical.conditions); set('f-diet',d.medical.diet); }
+    if (d.ice) {
+      if(d.ice[0]){set('f-ice1-name',d.ice[0].name);set('f-ice1-rel',d.ice[0].relationship);set('f-ice1-loc',d.ice[0].location);set('f-ice1-phone',d.ice[0].phone);}
+      if(d.ice[1]){set('f-ice2-name',d.ice[1].name);set('f-ice2-rel',d.ice[1].relationship);set('f-ice2-loc',d.ice[1].location);set('f-ice2-phone',d.ice[1].phone);}
+    }
+    if (d.vehicle) { set('f-make',d.vehicle.make_model); set('f-colour',d.vehicle.colour); set('f-rego',d.vehicle.rego); set('f-insurer',d.vehicle.insurer); set('f-policy',d.vehicle.policy); }
+    if (d.comms)   { set('f-inreach-contact',d.comms.inreach_contact); set('f-inreach-imei',d.comms.inreach_imei); }
+    if (d.status)  { set('f-location',d.status.location); set('f-updated',d.status.updated); set('f-plan',d.status.plan); }
+    document.getElementById('trail-rows').innerHTML = ''; rowCount = 0;
+    if (d.trail && d.trail.length) d.trail.forEach(e=>addTrailRow(e.date,e.place));
+    else addTrailRow();
+  }
+
+  // ── BUILD ──
+  function buildData() {
     const trail = [];
-    document.querySelectorAll('.trail-row').forEach(r => {
-      const date = r.querySelector('.td').value.trim();
-      const place = r.querySelector('.tp').value.trim();
-      if (date && place) trail.push({date, place});
+    document.querySelectorAll('.trail-row').forEach(r=>{
+      const date=r.querySelector('.td').value.trim(), place=r.querySelector('.tp').value.trim();
+      if(date&&place) trail.push({date,place});
     });
-
-    const data = {
-      person: {
-        name: val('f-name'),
-        callsign: val('f-callsign'),
-        dob: val('f-dob'),
-        nationality: val('f-nationality')
-      },
-      medical: {
-        blood_type: val('f-blood'),
-        allergies: val('f-allergies'),
-        medications: val('f-medications'),
-        conditions: val('f-conditions'),
-        diet: val('f-diet')
-      },
-      ice: [
-        { label:'ICE 1', name:val('f-ice1-name'), relationship:val('f-ice1-rel'), location:val('f-ice1-loc'), phone:val('f-ice1-phone') },
-        { label:'ICE 2', name:val('f-ice2-name'), relationship:val('f-ice2-rel'), location:val('f-ice2-loc'), phone:val('f-ice2-phone') }
-      ],
-      vehicle: {
-        make_model: val('f-make'),
-        colour: val('f-colour'),
-        rego: val('f-rego'),
-        insurer: val('f-insurer'),
-        policy: val('f-policy')
-      },
-      comms: {
-        inreach_contact: val('f-inreach-contact'),
-        inreach_imei: val('f-inreach-imei')
-      },
-      status: {
-        location: val('f-location'),
-        updated: val('f-updated'),
-        plan: val('f-plan')
-      },
-      trail: trail.length ? trail : [{date:'–', place:'No entries yet'}]
+    return {
+      person:   {name:v('f-name'),callsign:v('f-callsign'),dob:v('f-dob'),nationality:v('f-nationality')},
+      medical:  {blood_type:v('f-blood'),allergies:v('f-allergies'),medications:v('f-medications'),conditions:v('f-conditions'),diet:v('f-diet')},
+      ice:      [{label:'ICE 1',name:v('f-ice1-name'),relationship:v('f-ice1-rel'),location:v('f-ice1-loc'),phone:v('f-ice1-phone')},
+                 {label:'ICE 2',name:v('f-ice2-name'),relationship:v('f-ice2-rel'),location:v('f-ice2-loc'),phone:v('f-ice2-phone')}],
+      vehicle:  {make_model:v('f-make'),colour:v('f-colour'),rego:v('f-rego'),insurer:v('f-insurer'),policy:v('f-policy')},
+      comms:    {inreach_contact:v('f-inreach-contact'),inreach_imei:v('f-inreach-imei')},
+      status:   {location:v('f-location'),updated:v('f-updated'),plan:v('f-plan')},
+      trail:    trail.length ? trail : [{date:'–',place:'No entries yet'}]
     };
-
-    document.getElementById('json-out').textContent = JSON.stringify(data, null, 2);
-    const out = document.getElementById('output');
-    out.classList.add('visible');
-    setTimeout(() => out.scrollIntoView({behavior:'smooth'}), 100);
   }
 
-  function val(id) {
-    const el = document.getElementById(id);
-    return el ? el.value.trim() : '';
+  // ── SAVE ──
+  async function saveToGitHub() {
+    const token = getToken();
+    if (!token) { document.getElementById('token-banner').classList.add('show'); return; }
+    if (!currentSha) { setStatus('No SHA — reload and try again','err'); return; }
+    setStatus('Saving…','saving');
+    document.getElementById('btn-save').disabled = true;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(buildData(),null,2))));
+    try {
+      const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`,{
+        method:'PUT',
+        headers:{'Authorization':'token '+token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+        body:JSON.stringify({message:'Update touring status — '+v('f-location'),content,sha:currentSha,branch:GITHUB_BRANCH})
+      });
+      if (res.ok) {
+        const r = await res.json();
+        currentSha = r.content.sha;
+        setStatus('✓ Saved — live in ~60s','ok');
+      } else {
+        const e = await res.json();
+        setStatus('Error: '+(e.message||res.status),'err');
+      }
+    } catch(e) { setStatus('Network error: '+e.message,'err'); }
+    document.getElementById('btn-save').disabled = false;
   }
 
-  function copyJson() {
-    navigator.clipboard.writeText(document.getElementById('json-out').textContent).then(() => {
-      const m = document.getElementById('copied-msg');
-      m.style.display = 'block';
-      setTimeout(() => m.style.display = 'none', 2000);
-    });
-  }
+  function set(id,v){const el=document.getElementById(id);if(el&&v!==undefined)el.value=v||'';}
+  function v(id){const el=document.getElementById(id);return el?el.value.trim():'';}
+  function setStatus(msg,cls){const el=document.getElementById('save-status');el.textContent=msg;el.className='save-status'+(cls?' '+cls:'');}
 </script>
 </body>
 </html>
