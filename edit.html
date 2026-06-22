@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZL1SGS · Editor</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+  :root {
+    --red:#D0021B; --amber:#F5A623; --green:#2E7D32; --green-bg:#F1F8F1;
+    --ink:#1A1A1A; --mid:#555; --rule:#E0E0E0; --page:#F8F7F4; --white:#FFFFFF;
+    --mono:'IBM Plex Mono',monospace; --sans:'IBM Plex Sans',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:var(--sans);background:var(--page);color:var(--ink);min-height:100vh;}
+  .site-header{background:var(--ink);color:white;padding:14px 20px;}
+  .callsign{font-family:var(--mono);font-size:1rem;font-weight:700;letter-spacing:.08em;color:var(--amber);}
+  .header-sub{font-size:.7rem;color:#aaa;font-family:var(--mono);margin-top:2px;}
+  .container{max-width:640px;margin:0 auto;padding:16px 16px 60px;}
+
+  /* tabs */
+  .tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:2px solid var(--ink);padding-bottom:0;}
+  .tab{font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:8px 14px;cursor:pointer;border:none;background:none;color:var(--mid);border-bottom:3px solid transparent;margin-bottom:-2px;}
+  .tab.active{color:var(--ink);border-bottom-color:var(--ink);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+
+  .section-label{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--mid);padding:16px 0 8px;border-bottom:1px solid var(--rule);margin-bottom:12px;}
+  .field{margin-bottom:12px;}
+  .field label{display:block;font-family:var(--mono);font-size:.63rem;font-weight:700;
+    letter-spacing:.12em;color:var(--mid);text-transform:uppercase;margin-bottom:4px;}
+  .field input,.field textarea{width:100%;font-family:var(--mono);font-size:.85rem;
+    border:1px solid var(--rule);border-radius:3px;padding:8px 10px;color:var(--ink);background:var(--white);outline:none;}
+  .field input:focus,.field textarea:focus{border-color:var(--ink);}
+  .field textarea{resize:vertical;min-height:65px;}
+  .field .hint{font-size:.68rem;color:var(--mid);margin-top:3px;}
+
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+
+  /* ICE blocks */
+  .ice-block{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:14px;margin-bottom:10px;}
+  .ice-block-title{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.12em;
+    color:var(--red);text-transform:uppercase;margin-bottom:10px;}
+
+  /* trail */
+  .trail-rows{display:flex;flex-direction:column;gap:6px;margin-bottom:8px;}
+  .trail-row{display:grid;grid-template-columns:110px 1fr 32px;gap:6px;align-items:center;}
+  .trail-row input{font-family:var(--mono);font-size:.82rem;border:1px solid var(--rule);
+    border-radius:3px;padding:7px 9px;background:var(--white);outline:none;width:100%;}
+  .trail-row input:focus{border-color:var(--ink);}
+  .btn-remove{background:none;border:1px solid var(--rule);color:var(--mid);
+    font-size:1rem;border-radius:3px;cursor:pointer;padding:3px 8px;line-height:1;}
+  .btn-remove:hover{border-color:var(--red);color:var(--red);}
+  .btn-add{background:none;border:1px dashed var(--rule);color:var(--mid);
+    font-family:var(--mono);font-size:.75rem;padding:7px 14px;border-radius:3px;
+    cursor:pointer;width:100%;margin-bottom:12px;}
+  .btn-add:hover{border-color:var(--ink);color:var(--ink);}
+
+  /* buttons */
+  .btn-primary{background:var(--ink);color:white;font-family:var(--mono);font-size:.85rem;
+    font-weight:700;padding:12px 20px;border:none;border-radius:3px;cursor:pointer;width:100%;margin-bottom:8px;}
+  .btn-primary:hover{background:var(--green);}
+  .btn-today{font-family:var(--mono);font-size:.68rem;background:var(--page);
+    border:1px solid var(--rule);border-radius:2px;padding:2px 7px;cursor:pointer;margin-left:8px;color:var(--mid);}
+  .btn-today:hover{border-color:var(--ink);color:var(--ink);}
+
+  /* output */
+  .output{display:none;margin-top:20px;}
+  .output.visible{display:block;}
+  .instructions{background:var(--green-bg);border-left:4px solid var(--green);
+    padding:12px 14px;border-radius:0 4px 4px 0;font-size:.8rem;line-height:1.6;margin-bottom:10px;}
+  .instructions ol{padding-left:18px;}
+  .instructions li{margin-bottom:2px;}
+  .json-preview{background:var(--ink);color:#7EC8A4;font-family:var(--mono);font-size:.75rem;
+    padding:14px;border-radius:4px;white-space:pre;overflow-x:auto;line-height:1.6;margin-bottom:8px;}
+  .btn-copy{background:var(--green);color:white;font-family:var(--mono);font-size:.82rem;
+    font-weight:700;padding:11px 20px;border:none;border-radius:3px;cursor:pointer;width:100%;margin-bottom:6px;}
+  .btn-copy:hover{opacity:.9;}
+  .btn-github{background:#24292F;color:white;font-family:var(--mono);font-size:.82rem;
+    font-weight:600;padding:11px 20px;border:none;border-radius:3px;cursor:pointer;
+    width:100%;text-decoration:none;display:block;text-align:center;}
+  .btn-github:hover{background:#444;}
+  .copied{display:none;font-family:var(--mono);font-size:.72rem;color:var(--green);text-align:center;padding:4px;}
+
+  @media(max-width:400px){.row2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="callsign">ZL1SGS · Page Editor</div>
+  <div class="header-sub">All changes go into data.json — commit to go live</div>
+</header>
+
+<div class="container">
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('touring')">Touring</button>
+    <button class="tab" onclick="switchTab('medical')">Medical</button>
+    <button class="tab" onclick="switchTab('contacts')">Contacts</button>
+    <button class="tab" onclick="switchTab('vehicle')">Vehicle</button>
+    <button class="tab" onclick="switchTab('personal')">Personal</button>
+  </div>
+
+  <!-- ══ TOURING ══ -->
+  <div class="tab-panel active" id="tab-touring">
+    <div class="section-label">Current Status</div>
+    <div class="field">
+      <label>Current Location</label>
+      <input type="text" id="f-location" placeholder="e.g. Cairns, QLD">
+    </div>
+    <div class="field">
+      <label>Last Updated <button class="btn-today" onclick="setToday()">Today</button></label>
+      <input type="text" id="f-updated" placeholder="e.g. 15 Jan 2027">
+    </div>
+    <div class="field">
+      <label>This Week's Plan</label>
+      <textarea id="f-plan" placeholder="e.g. Heading south via Bruce Hwy, stopping Airlie Beach and Mackay"></textarea>
+    </div>
+
+    <div class="section-label">Trail Log <span style="font-weight:400;letter-spacing:0">(oldest first)</span></div>
+    <div class="trail-rows" id="trail-rows"></div>
+    <button class="btn-add" onclick="addTrailRow()">+ Add location</button>
+  </div>
+
+  <!-- ══ MEDICAL ══ -->
+  <div class="tab-panel" id="tab-medical">
+    <div class="section-label">Medical Information</div>
+    <div class="field">
+      <label>Blood Type</label>
+      <input type="text" id="f-blood" placeholder="e.g. O+">
+    </div>
+    <div class="field">
+      <label>Allergies</label>
+      <input type="text" id="f-allergies" placeholder="e.g. None known / Penicillin">
+    </div>
+    <div class="field">
+      <label>Medications</label>
+      <input type="text" id="f-medications" placeholder="e.g. None">
+    </div>
+    <div class="field">
+      <label>Medical Conditions</label>
+      <input type="text" id="f-conditions" placeholder="e.g. None">
+    </div>
+    <div class="field">
+      <label>Diet / Treatment Notes</label>
+      <input type="text" id="f-diet" placeholder="e.g. Vegan — no animal products in treatment">
+    </div>
+  </div>
+
+  <!-- ══ CONTACTS ══ -->
+  <div class="tab-panel" id="tab-contacts">
+    <div class="section-label">ICE Contact 1</div>
+    <div class="ice-block">
+      <div class="row2">
+        <div class="field"><label>Name</label><input type="text" id="f-ice1-name" placeholder="Full name"></div>
+        <div class="field"><label>Relationship</label><input type="text" id="f-ice1-rel" placeholder="e.g. Partner"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Location</label><input type="text" id="f-ice1-loc" placeholder="e.g. Auckland, NZ"></div>
+        <div class="field"><label>Phone (intl format)</label><input type="text" id="f-ice1-phone" placeholder="+64XXXXXXXXX"></div>
+      </div>
+    </div>
+
+    <div class="section-label">ICE Contact 2</div>
+    <div class="ice-block">
+      <div class="row2">
+        <div class="field"><label>Name</label><input type="text" id="f-ice2-name" placeholder="Full name"></div>
+        <div class="field"><label>Relationship</label><input type="text" id="f-ice2-rel" placeholder="e.g. Brother"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label>Location</label><input type="text" id="f-ice2-loc" placeholder="e.g. London, UK"></div>
+        <div class="field"><label>Phone (intl format)</label><input type="text" id="f-ice2-phone" placeholder="+44XXXXXXXXXX"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ VEHICLE ══ -->
+  <div class="tab-panel" id="tab-vehicle">
+    <div class="section-label">Motorcycle</div>
+    <div class="row2">
+      <div class="field"><label>Make &amp; Model</label><input type="text" id="f-make" placeholder="e.g. BMW R1250GSA"></div>
+      <div class="field"><label>Colour</label><input type="text" id="f-colour" placeholder="e.g. Kalamata"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Registration</label><input type="text" id="f-rego" placeholder="e.g. ABC123"></div>
+      <div class="field"><label>Insurer</label><input type="text" id="f-insurer" placeholder="e.g. NRMA"></div>
+    </div>
+    <div class="field"><label>Policy Number</label><input type="text" id="f-policy" placeholder="Policy number"></div>
+
+    <div class="section-label">Satellite Communicator</div>
+    <div class="field"><label>inReach Contact</label><input type="text" id="f-inreach-contact" placeholder="e.g. email or phone"></div>
+    <div class="field"><label>inReach IMEI</label><input type="text" id="f-inreach-imei" placeholder="IMEI number"></div>
+  </div>
+
+  <!-- ══ PERSONAL ══ -->
+  <div class="tab-panel" id="tab-personal">
+    <div class="section-label">Personal Details</div>
+    <div class="row2">
+      <div class="field"><label>Full Name</label><input type="text" id="f-name" placeholder="Legal name"></div>
+      <div class="field"><label>Callsign</label><input type="text" id="f-callsign" placeholder="e.g. ZL1SGS"></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Date of Birth</label><input type="text" id="f-dob" placeholder="DD MMM YYYY"></div>
+      <div class="field"><label>Nationality</label><input type="text" id="f-nationality" placeholder="e.g. British / New Zealand"></div>
+    </div>
+  </div>
+
+  <!-- ══ GENERATE ══ -->
+  <div style="margin-top:24px;">
+    <button class="btn-primary" onclick="generate()">Generate data.json</button>
+  </div>
+
+  <!-- ══ OUTPUT ══ -->
+  <div class="output" id="output">
+    <div class="instructions">
+      <ol>
+        <li>Copy the JSON below</li>
+        <li>Click <strong>Open data.json on GitHub</strong></li>
+        <li>Select all text, paste, commit</li>
+        <li>Live in ~60 seconds ✓</li>
+      </ol>
+    </div>
+    <div class="json-preview" id="json-out"></div>
+    <button class="btn-copy" onclick="copyJson()">Copy JSON</button>
+    <div class="copied" id="copied-msg">✓ Copied</div>
+    <a class="btn-github" href="https://github.com/steves999/SOS/edit/main/data.json" target="_blank">
+      Open data.json on GitHub →
+    </a>
+  </div>
+
+</div>
+
+<script>
+  const GITHUB_URL = 'https://github.com/steves999/SOS/edit/main/data.json';
+  let rowCount = 0;
+
+  // ── TABS ──
+  function switchTab(name) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // ── TODAY ──
+  function setToday() {
+    document.getElementById('f-updated').value = new Date().toLocaleDateString('en-NZ',
+      {day:'numeric',month:'short',year:'numeric'});
+  }
+
+  // ── TRAIL ──
+  function addTrailRow(date='', place='') {
+    rowCount++;
+    const id = 'tr-' + rowCount;
+    const div = document.createElement('div');
+    div.className = 'trail-row'; div.id = id;
+    div.innerHTML = `
+      <input type="text" placeholder="e.g. 15 Jan" value="${date}" class="td">
+      <input type="text" placeholder="e.g. Townsville, QLD" value="${place}" class="tp">
+      <button class="btn-remove" onclick="document.getElementById('${id}').remove()">×</button>`;
+    document.getElementById('trail-rows').appendChild(div);
+  }
+
+  // ── LOAD existing data.json ──
+  fetch('data.json?v=' + Date.now())
+    .then(r => r.json())
+    .then(d => {
+      if (d.person) {
+        set('f-name', d.person.name);
+        set('f-callsign', d.person.callsign);
+        set('f-dob', d.person.dob);
+        set('f-nationality', d.person.nationality);
+      }
+      if (d.medical) {
+        set('f-blood', d.medical.blood_type);
+        set('f-allergies', d.medical.allergies);
+        set('f-medications', d.medical.medications);
+        set('f-conditions', d.medical.conditions);
+        set('f-diet', d.medical.diet);
+      }
+      if (d.ice && d.ice[0]) {
+        set('f-ice1-name', d.ice[0].name);
+        set('f-ice1-rel', d.ice[0].relationship);
+        set('f-ice1-loc', d.ice[0].location);
+        set('f-ice1-phone', d.ice[0].phone);
+      }
+      if (d.ice && d.ice[1]) {
+        set('f-ice2-name', d.ice[1].name);
+        set('f-ice2-rel', d.ice[1].relationship);
+        set('f-ice2-loc', d.ice[1].location);
+        set('f-ice2-phone', d.ice[1].phone);
+      }
+      if (d.vehicle) {
+        set('f-make', d.vehicle.make_model);
+        set('f-colour', d.vehicle.colour);
+        set('f-rego', d.vehicle.rego);
+        set('f-insurer', d.vehicle.insurer);
+        set('f-policy', d.vehicle.policy);
+      }
+      if (d.comms) {
+        set('f-inreach-contact', d.comms.inreach_contact);
+        set('f-inreach-imei', d.comms.inreach_imei);
+      }
+      if (d.status) {
+        set('f-location', d.status.location);
+        set('f-updated', d.status.updated);
+        set('f-plan', d.status.plan);
+      }
+      if (d.trail && d.trail.length) {
+        d.trail.forEach(e => addTrailRow(e.date, e.place));
+      } else { addTrailRow(); }
+    })
+    .catch(() => addTrailRow());
+
+  function set(id, val) {
+    const el = document.getElementById(id);
+    if (el && val) el.value = val;
+  }
+
+  // ── GENERATE ──
+  function generate() {
+    const trail = [];
+    document.querySelectorAll('.trail-row').forEach(r => {
+      const date = r.querySelector('.td').value.trim();
+      const place = r.querySelector('.tp').value.trim();
+      if (date && place) trail.push({date, place});
+    });
+
+    const data = {
+      person: {
+        name: val('f-name'),
+        callsign: val('f-callsign'),
+        dob: val('f-dob'),
+        nationality: val('f-nationality')
+      },
+      medical: {
+        blood_type: val('f-blood'),
+        allergies: val('f-allergies'),
+        medications: val('f-medications'),
+        conditions: val('f-conditions'),
+        diet: val('f-diet')
+      },
+      ice: [
+        { label:'ICE 1', name:val('f-ice1-name'), relationship:val('f-ice1-rel'), location:val('f-ice1-loc'), phone:val('f-ice1-phone') },
+        { label:'ICE 2', name:val('f-ice2-name'), relationship:val('f-ice2-rel'), location:val('f-ice2-loc'), phone:val('f-ice2-phone') }
+      ],
+      vehicle: {
+        make_model: val('f-make'),
+        colour: val('f-colour'),
+        rego: val('f-rego'),
+        insurer: val('f-insurer'),
+        policy: val('f-policy')
+      },
+      comms: {
+        inreach_contact: val('f-inreach-contact'),
+        inreach_imei: val('f-inreach-imei')
+      },
+      status: {
+        location: val('f-location'),
+        updated: val('f-updated'),
+        plan: val('f-plan')
+      },
+      trail: trail.length ? trail : [{date:'–', place:'No entries yet'}]
+    };
+
+    document.getElementById('json-out').textContent = JSON.stringify(data, null, 2);
+    const out = document.getElementById('output');
+    out.classList.add('visible');
+    setTimeout(() => out.scrollIntoView({behavior:'smooth'}), 100);
+  }
+
+  function val(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+
+  function copyJson() {
+    navigator.clipboard.writeText(document.getElementById('json-out').textContent).then(() => {
+      const m = document.getElementById('copied-msg');
+      m.style.display = 'block';
+      setTimeout(() => m.style.display = 'none', 2000);
+    });
+  }
+</script>
+</body>
+</html>

@@ -1,4 +1,44 @@
 {
+  "person": {
+    "name": "[YOUR FULL NAME]",
+    "callsign": "ZL1SGS",
+    "dob": "[DD MMM YYYY]",
+    "nationality": "British / New Zealand"
+  },
+  "medical": {
+    "blood_type": "[YOUR BLOOD TYPE]",
+    "allergies": "None known",
+    "medications": "None",
+    "conditions": "None",
+    "diet": "Vegan — no animal products in treatment"
+  },
+  "ice": [
+    {
+      "label": "ICE 1",
+      "name": "[Name]",
+      "relationship": "[Relationship]",
+      "location": "[City, Country]",
+      "phone": "+64XXXXXXXXX"
+    },
+    {
+      "label": "ICE 2",
+      "name": "[Name]",
+      "relationship": "[Relationship]",
+      "location": "[City, Country]",
+      "phone": "+64XXXXXXXXX"
+    }
+  ],
+  "vehicle": {
+    "make_model": "BMW R1250GSA",
+    "colour": "[Colour]",
+    "rego": "[PLATE]",
+    "insurer": "[INSURER]",
+    "policy": "[POLICY NUMBER]"
+  },
+  "comms": {
+    "inreach_contact": "[inReach email or number]",
+    "inreach_imei": "[IMEI]"
+  },
   "status": {
     "location": "Auckland, New Zealand",
     "updated": "22 Jun 2026",
