@@ -19,13 +19,6 @@
       "relationship": "Spoiuse",
       "location": "Auckland, NZ",
       "phone": "+64 210 825 8515"
-    },
-    {
-      "label": "ICE 2",
-      "name": "[Name]",
-      "relationship": "[Relationship]",
-      "location": "[City, Country]",
-      "phone": "+64XXXXXXXXX"
     }
   ],
   "vehicle": {
@@ -46,7 +39,7 @@
   },
   "trail": [
     {
-      "date": "Ã¢ÂÂ",
+      "date": "ÃÂ¢ÃÂÃÂ",
       "place": "No entries yet"
     }
   ]
