@@ -6,8 +6,8 @@
     "nationality": "British / New Zealand"
   },
   "medical": {
-    "blood_type": "[YOUR BLOOD TYPE]",
-    "allergies": "None known",
+    "blood_type": "O+",
+    "allergies": "Penicillin",
     "medications": "None",
     "conditions": "None",
     "diet": "Vegan â no animal products in treatment"
@@ -15,10 +15,10 @@
   "ice": [
     {
       "label": "ICE 1",
-      "name": "[Name]",
-      "relationship": "[Relationship]",
-      "location": "[City, Country]",
-      "phone": "+64XXXXXXXXX"
+      "name": "Cate Ryan",
+      "relationship": "Spoiuse",
+      "location": "Auckland, NZ",
+      "phone": "+64 210 825 8515"
     },
     {
       "label": "ICE 2",
@@ -29,10 +29,10 @@
     }
   ],
   "vehicle": {
-    "make_model": "BMW R1250GSA",
-    "colour": "[Colour]",
-    "rego": "[PLATE]",
-    "insurer": "[INSURER]",
+    "make_model": "BMW R1200GS",
+    "colour": "Yellow",
+    "rego": "55YMQ",
+    "insurer": "Star",
     "policy": "[POLICY NUMBER]"
   },
   "comms": {
@@ -42,7 +42,7 @@
   "status": {
     "location": "Auckland, New Zealand",
     "updated": "22 Jun 2026",
-    "plan": "Trip not yet started. Departing late 2026 for Australia ADV tour."
+    "plan": ""
   },
   "trail": [
     {
