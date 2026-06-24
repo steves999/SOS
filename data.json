@@ -1,46 +1,59 @@
 {
   "person": {
-    "name": "STEVE GORE-SMITH",
-    "callsign": "ZL1SGS",
-    "dob": "02 OCT 1963",
-    "nationality": "British / New Zealand"
-  },
-  "medical": {
-    "blood_type": "O+",
-    "allergies": "Penicillin",
-    "medications": "None",
-    "conditions": "None",
-    "diet": "Vegan - no animal products in treatment preferred"
+    "name": "[YOUR FULL NAME]",
+    "callsign": "ZL1SGS"
   },
   "ice": [
     {
       "label": "ICE 1",
-      "name": "tbc",
-      "relationship": "Spouse",
-      "location": "Auckland, NZ",
-      "phone": "+64 210 825 8515"
+      "name": "[Name]",
+      "relationship": "[Relationship]",
+      "location": "[City, Country]",
+      "phone": "+64XXXXXXXXX"
+    },
+    {
+      "label": "ICE 2",
+      "name": "[Name]",
+      "relationship": "[Relationship]",
+      "location": "[City, Country]",
+      "phone": "+64XXXXXXXXX"
     }
   ],
-  "vehicle": {
-    "make_model": "BMW R1200GS",
-    "colour": "Yellow",
-    "rego": "55YMQ",
-    "insurer": "Star",
-    "policy": "[POLICY NUMBER]"
-  },
-  "comms": {
-    "inreach_contact": "[inReach email or number]",
-    "inreach_imei": "[IMEI]"
-  },
   "status": {
     "location": "Auckland, New Zealand",
     "updated": "22 Jun 2026",
-    "plan": ""
+    "plan": "Trip not yet started. Departing late 2026 for Australia ADV tour."
   },
   "trail": [
+    { "date": "–", "place": "No entries yet" }
+  ],
+  "sections": [
     {
-      "date": "ÃÂ¢ÃÂÃÂ",
-      "place": "No entries yet"
+      "label": "Medical",
+      "fields": [
+        { "label": "Blood Type", "value": "[YOUR BLOOD TYPE]", "highlight": true },
+        { "label": "Allergies", "value": "None known" },
+        { "label": "Medications", "value": "None" },
+        { "label": "Conditions", "value": "None" },
+        { "label": "Diet", "value": "Vegan — no animal products in treatment" }
+      ]
+    },
+    {
+      "label": "Vehicle",
+      "fields": [
+        { "label": "Motorcycle", "value": "BMW R1250GSA" },
+        { "label": "Colour", "value": "[Colour]" },
+        { "label": "Registration", "value": "[PLATE]" },
+        { "label": "Insurer", "value": "[INSURER]" },
+        { "label": "Policy", "value": "[NUMBER]" }
+      ]
+    },
+    {
+      "label": "Personal",
+      "fields": [
+        { "label": "Date of Birth", "value": "[DD MMM YYYY]" },
+        { "label": "Nationality", "value": "British / New Zealand" }
+      ]
     }
   ]
 }

@@ -21,15 +21,20 @@
   .sos-badge{background:var(--red);color:white;font-family:var(--mono);font-weight:700;font-size:.8rem;padding:4px 10px;letter-spacing:.1em;border-radius:2px;flex-shrink:0;}
   .container{max-width:680px;margin:0 auto;padding:0 16px 48px;}
   .section-label{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);padding:20px 0 8px;border-bottom:2px solid var(--ink);margin-bottom:12px;}
-  .emergency-block{background:var(--red-bg);border-left:4px solid var(--red);padding:16px;margin-bottom:10px;border-radius:0 4px 4px 0;}
-  .emergency-block .label{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.15em;color:var(--red);text-transform:uppercase;margin-bottom:4px;}
-  .emergency-block .value{font-family:var(--mono);font-size:1.3rem;font-weight:700;}
-  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
-  .info-cell{background:var(--white);border:1px solid var(--rule);padding:12px 14px;border-radius:4px;}
-  .info-cell .label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--mid);text-transform:uppercase;margin-bottom:4px;}
-  .info-cell .value{font-family:var(--mono);font-size:.9rem;font-weight:600;}
-  .info-cell .sub{font-size:.72rem;color:var(--mid);margin-top:2px;}
-  .info-cell.full{grid-column:1/-1;}
+
+  /* highlight field (blood type etc) */
+  .field-highlight{background:var(--red-bg);border-left:4px solid var(--red);padding:14px 16px;margin-bottom:8px;border-radius:0 4px 4px 0;}
+  .field-highlight .fl{font-family:var(--mono);font-size:.65rem;font-weight:700;letter-spacing:.15em;color:var(--red);text-transform:uppercase;margin-bottom:4px;}
+  .field-highlight .fv{font-family:var(--mono);font-size:1.3rem;font-weight:700;}
+
+  /* grid of normal fields */
+  .fields-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+  .field-cell{background:var(--white);border:1px solid var(--rule);padding:11px 13px;border-radius:4px;}
+  .field-cell .fl{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--mid);text-transform:uppercase;margin-bottom:3px;}
+  .field-cell .fv{font-family:var(--mono);font-size:.88rem;font-weight:600;color:var(--ink);}
+  .field-cell.full{grid-column:1/-1;}
+
+  /* ICE */
   .ice-list{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
   .ice-item{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .ice-item .ice-label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--red);text-transform:uppercase;margin-bottom:2px;}
@@ -37,170 +42,121 @@
   .ice-item .ice-rel{font-size:.75rem;color:var(--mid);}
   .ice-call{background:var(--ink);color:white;font-family:var(--mono);font-size:.85rem;font-weight:600;padding:8px 14px;border-radius:3px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
   .ice-call:hover{background:var(--red);}
+
+  /* status */
   .status-bar{background:var(--green-bg);border-left:4px solid var(--green);padding:14px 16px;border-radius:0 4px 4px 0;margin-bottom:10px;}
-  .status-bar .label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--green);text-transform:uppercase;margin-bottom:4px;}
-  .status-bar .value{font-family:var(--mono);font-size:1rem;font-weight:600;}
-  .status-bar .updated{font-size:.7rem;color:var(--mid);margin-top:4px;}
+  .status-bar .sl{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--green);text-transform:uppercase;margin-bottom:4px;}
+  .status-bar .sv{font-family:var(--mono);font-size:1rem;font-weight:600;}
+  .status-bar .su{font-size:.7rem;color:var(--mid);margin-top:4px;}
   .plan-block{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:14px 16px;margin-bottom:10px;}
-  .plan-block .label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--mid);text-transform:uppercase;margin-bottom:8px;}
-  .plan-block .plan-text{font-size:.9rem;line-height:1.55;}
+  .plan-block .pl{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--mid);text-transform:uppercase;margin-bottom:8px;}
+  .plan-block .pv{font-size:.9rem;line-height:1.55;}
   .trail-log{background:var(--white);border:1px solid var(--rule);border-radius:4px;overflow:hidden;margin-bottom:10px;}
-  .trail-log .log-header{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--mid);text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--rule);background:var(--page);}
+  .trail-log .tl-hdr{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--mid);text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--rule);background:var(--page);}
   .trail-entry{display:flex;gap:12px;align-items:baseline;padding:8px 14px;border-bottom:1px solid var(--rule);font-size:.85rem;}
   .trail-entry:last-child{border-bottom:none;}
   .trail-date{font-family:var(--mono);font-size:.7rem;color:var(--mid);white-space:nowrap;flex-shrink:0;min-width:80px;}
   .trail-place{color:var(--ink);font-weight:500;}
-  .bike-row{display:flex;gap:8px;flex-wrap:wrap;}
-  .bike-chip{font-family:var(--mono);font-size:.75rem;background:var(--page);border:1px solid var(--rule);padding:4px 10px;border-radius:2px;}
+
+  .loading{color:var(--mid);font-family:var(--mono);font-size:.8rem;padding:8px 0;}
   .site-footer{text-align:center;font-family:var(--mono);font-size:.65rem;color:#bbb;padding:24px 16px 16px;}
-  .loading{color:var(--mid);font-family:var(--mono);font-size:.8rem;}
-  @media(max-width:400px){.info-grid{grid-template-columns:1fr;}.ice-item{flex-direction:column;align-items:flex-start;}.ice-call{width:100%;text-align:center;}}
+  @media(max-width:400px){.fields-grid{grid-template-columns:1fr;}.ice-item{flex-direction:column;align-items:flex-start;}.ice-call{width:100%;text-align:center;}}
 </style>
 </head>
 <body>
 <header class="site-header">
   <div>
     <div class="callsign" id="h-callsign">ZL1SGS</div>
-    <div class="header-sub" id="h-sub">Amateur Radio · ADV Touring</div>
+    <div class="header-sub">Amateur Radio · ADV Touring · New Zealand</div>
   </div>
   <div class="sos-badge">EMERGENCY INFO</div>
 </header>
 
-<div class="container">
-
-  <!-- TOURING STATUS — shown first, most time-sensitive -->
-  <div class="section-label">Touring Status</div>
-  <div class="status-bar">
-    <div class="label">Current Location</div>
-    <div class="value" id="current-location"><span class="loading">Loading…</span></div>
-    <div class="updated" id="status-updated"></div>
-  </div>
-  <div class="plan-block">
-    <div class="label">This Week's Plan</div>
-    <div class="plan-text" id="weekly-plan"><span class="loading">Loading…</span></div>
-  </div>
-  <div class="trail-log">
-    <div class="log-header">Recent Locations</div>
-    <div id="trail-list"><div class="trail-entry"><span class="loading">Loading…</span></div></div>
-  </div>
-
-  <!-- MEDICAL -->
-  <div class="section-label">Medical &amp; Emergency</div>
-  <div class="emergency-block">
-    <div class="label">Blood Type</div>
-    <div class="value" id="blood-type"><span class="loading">…</span></div>
-  </div>
-  <div class="info-grid">
-    <div class="info-cell">
-      <div class="label">Allergies</div>
-      <div class="value" id="allergies"><span class="loading">…</span></div>
-    </div>
-    <div class="info-cell">
-      <div class="label">Diet</div>
-      <div class="value" id="diet"><span class="loading">…</span></div>
-    </div>
-    <div class="info-cell">
-      <div class="label">Medications</div>
-      <div class="value" id="medications"><span class="loading">…</span></div>
-    </div>
-    <div class="info-cell">
-      <div class="label">Conditions</div>
-      <div class="value" id="conditions"><span class="loading">…</span></div>
-    </div>
-  </div>
-
-  <!-- ICE -->
-  <div class="section-label">In Case of Emergency</div>
-  <div class="ice-list" id="ice-list"><div class="loading">Loading…</div></div>
-
-  <!-- VEHICLE -->
-  <div class="section-label">Vehicle</div>
-  <div class="info-cell full" style="margin-bottom:8px;">
-    <div class="label">Motorcycle</div>
-    <div class="value" id="vehicle-name" style="margin-bottom:8px;"><span class="loading">…</span></div>
-    <div class="bike-row" id="vehicle-chips"></div>
-  </div>
-  <div class="info-cell full" style="margin-bottom:10px;">
-    <div class="label">Satellite Communicator</div>
-    <div class="value">Garmin inReach</div>
-    <div class="sub" id="inreach-sub"><span class="loading">…</span></div>
-  </div>
-
+<div class="container" id="main-content">
+  <div class="loading" style="padding:24px 0;">Loading…</div>
 </div>
 
-<div class="site-footer" id="footer-text">ZL1SGS · Auckland, New Zealand</div>
+<div class="site-footer" id="footer">ZL1SGS · New Zealand</div>
 
 <script>
 fetch('data.json?v=' + Date.now())
   .then(r => r.json())
   .then(d => {
+    const c = document.getElementById('main-content');
+    c.innerHTML = '';
+
     // Header
     if (d.person) {
-      document.getElementById('h-callsign').textContent = d.person.callsign + ' · ' + d.person.name;
-      document.getElementById('footer-text').textContent = d.person.callsign + ' · ' + d.person.name + ' · Auckland, New Zealand';
+      document.getElementById('h-callsign').textContent = d.person.callsign + (d.person.name ? ' · ' + d.person.name : '');
+      document.getElementById('footer').textContent = (d.person.callsign || '') + (d.person.name ? ' · ' + d.person.name : '') + ' · New Zealand';
     }
 
-    // Status
+    // ── TOURING STATUS (always first) ──
     if (d.status) {
-      document.getElementById('current-location').textContent = d.status.location || '—';
-      document.getElementById('status-updated').textContent = d.status.updated ? 'Updated ' + d.status.updated : '';
-      document.getElementById('weekly-plan').textContent = d.status.plan || '—';
+      c.innerHTML += `<div class="section-label">Touring Status</div>`;
+      c.innerHTML += `
+        <div class="status-bar">
+          <div class="sl">Current Location</div>
+          <div class="sv">${d.status.location || '—'}</div>
+          <div class="su">${d.status.updated ? 'Updated ' + d.status.updated : ''}</div>
+        </div>
+        <div class="plan-block">
+          <div class="pl">This Week's Plan</div>
+          <div class="pv">${d.status.plan || '—'}</div>
+        </div>`;
     }
 
-    // Trail
     if (d.trail && d.trail.length) {
-      const list = document.getElementById('trail-list');
-      list.innerHTML = '';
-      [...d.trail].reverse().slice(0,10).forEach(e => {
-        const div = document.createElement('div');
-        div.className = 'trail-entry';
-        div.innerHTML = `<span class="trail-date">${e.date}</span><span class="trail-place">${e.place}</span>`;
-        list.appendChild(div);
-      });
+      const entries = [...d.trail].reverse().slice(0,10).map(e =>
+        `<div class="trail-entry"><span class="trail-date">${e.date}</span><span class="trail-place">${e.place}</span></div>`
+      ).join('');
+      c.innerHTML += `<div class="trail-log"><div class="tl-hdr">Recent Locations</div>${entries}</div>`;
     }
 
-    // Medical
-    if (d.medical) {
-      document.getElementById('blood-type').textContent = d.medical.blood_type || '—';
-      document.getElementById('allergies').textContent = d.medical.allergies || '—';
-      document.getElementById('diet').textContent = d.medical.diet || '—';
-      document.getElementById('medications').textContent = d.medical.medications || '—';
-      document.getElementById('conditions').textContent = d.medical.conditions || '—';
-    }
-
-    // ICE
+    // ── ICE (always prominent) ──
     if (d.ice && d.ice.length) {
-      const list = document.getElementById('ice-list');
-      list.innerHTML = '';
-      d.ice.forEach(c => {
-        list.innerHTML += `
-          <div class="ice-item">
-            <div>
-              <div class="ice-label">${c.label}</div>
-              <div class="ice-name">${c.name}</div>
-              <div class="ice-rel">${c.relationship} · ${c.location}</div>
-            </div>
-            <a class="ice-call" href="tel:${c.phone}">Call</a>
-          </div>`;
+      c.innerHTML += `<div class="section-label">In Case of Emergency</div>`;
+      const items = d.ice.map(i => `
+        <div class="ice-item">
+          <div>
+            <div class="ice-label">${i.label}</div>
+            <div class="ice-name">${i.name}</div>
+            <div class="ice-rel">${i.relationship}${i.location ? ' · ' + i.location : ''}</div>
+          </div>
+          <a class="ice-call" href="tel:${i.phone}">Call</a>
+        </div>`).join('');
+      c.innerHTML += `<div class="ice-list">${items}</div>`;
+    }
+
+    // ── DYNAMIC SECTIONS ──
+    if (d.sections && d.sections.length) {
+      d.sections.forEach(sec => {
+        c.innerHTML += `<div class="section-label">${sec.label}</div>`;
+
+        // Highlight fields first
+        sec.fields.filter(f => f.highlight).forEach(f => {
+          c.innerHTML += `
+            <div class="field-highlight">
+              <div class="fl">${f.label}</div>
+              <div class="fv">${f.value}</div>
+            </div>`;
+        });
+
+        // Normal fields in grid
+        const normal = sec.fields.filter(f => !f.highlight);
+        if (normal.length) {
+          const cells = normal.map(f => `
+            <div class="field-cell${normal.length === 1 ? ' full' : ''}">
+              <div class="fl">${f.label}</div>
+              <div class="fv">${f.value}</div>
+            </div>`).join('');
+          c.innerHTML += `<div class="fields-grid">${cells}</div>`;
+        }
       });
-    }
-
-    // Vehicle
-    if (d.vehicle) {
-      document.getElementById('vehicle-name').textContent = d.vehicle.make_model + ' · ' + d.vehicle.colour;
-      document.getElementById('vehicle-chips').innerHTML = `
-        <span class="bike-chip">Rego: ${d.vehicle.rego}</span>
-        <span class="bike-chip">Insurance: ${d.vehicle.insurer}</span>
-        <span class="bike-chip">Policy: ${d.vehicle.policy}</span>`;
-    }
-
-    // Comms
-    if (d.comms) {
-      document.getElementById('inreach-sub').textContent = 'Contact via: ' + d.comms.inreach_contact;
     }
   })
   .catch(() => {
-    document.getElementById('current-location').textContent = 'Unable to load data';
+    document.getElementById('main-content').innerHTML = '<div class="loading">Unable to load information.</div>';
   });
 </script>
 </body>
