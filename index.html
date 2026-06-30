@@ -40,6 +40,7 @@
   .ice-item .ice-label{font-family:var(--mono);font-size:.6rem;font-weight:700;letter-spacing:.15em;color:var(--red);text-transform:uppercase;margin-bottom:2px;}
   .ice-item .ice-name{font-weight:600;font-size:.95rem;}
   .ice-item .ice-rel{font-size:.75rem;color:var(--mid);}
+  .ice-item .ice-phone{font-family:var(--mono);font-size:.82rem;font-weight:600;color:var(--ink);margin-top:3px;}
   .ice-call{background:var(--ink);color:white;font-family:var(--mono);font-size:.85rem;font-weight:600;padding:8px 14px;border-radius:3px;text-decoration:none;white-space:nowrap;flex-shrink:0;}
   .ice-call:hover{background:var(--red);}
 
@@ -122,6 +123,7 @@ fetch('data.json?v=' + Date.now())
             <div class="ice-label">${i.label}</div>
             <div class="ice-name">${i.name}</div>
             <div class="ice-rel">${i.relationship}${i.location ? ' · ' + i.location : ''}</div>
+            ${i.phone ? `<div class="ice-phone">${i.phone}</div>` : ''}
           </div>
           <a class="ice-call" href="tel:${i.phone}">Call</a>
         </div>`).join('');
