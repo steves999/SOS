@@ -15,7 +15,7 @@
   ],
   "status": {
     "location": "Auckland, New Zealand",
-    "updated": "22 Jun 2026",
+    "updated": "30 Jun 2026",
     "plan": ""
   },
   "trail": [
@@ -86,6 +86,24 @@
         {
           "label": "Nationality",
           "value": "British / New Zealand"
+        }
+      ]
+    },
+    {
+      "label": "NEW SECTION",
+      "fields": [
+        {
+          "label": "UK passport",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "label": "NEW SECTION",
+      "fields": [
+        {
+          "label": "NZ passport",
+          "value": ""
         }
       ]
     }
