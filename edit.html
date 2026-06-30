@@ -191,11 +191,8 @@
 
   <!-- PERSONAL -->
   <div class="tab-panel" id="tab-personal">
-    <div class="section-label">Page Header Details</div>
-    <div class="row2">
-      <div class="field"><label>Full Name</label><input type="text" id="f-name" placeholder="Legal name"></div>
-      <div class="field"><label>Callsign</label><input type="text" id="f-callsign" placeholder="e.g. ZL1SGS"></div>
-    </div>
+    <div class="section-label">Personal Details</div>
+    <div class="field"><label>Full Name</label><input type="text" id="f-name" placeholder="Legal name"></div>
   </div>
 
   <div class="save-bar">
@@ -370,7 +367,7 @@
   }
 
   function populate(d) {
-    if(d.person){ set('f-name',d.person.name); set('f-callsign',d.person.callsign); }
+    if(d.person){ set('f-name',d.person.name); }
     if(d.status){ set('f-location',d.status.location); set('f-updated',d.status.updated); set('f-plan',d.status.plan); }
     document.getElementById('trail-rows').innerHTML=''; rowCount=0;
     if(d.trail&&d.trail.length) d.trail.forEach(e=>addTrailRow(e.date,e.place)); else addTrailRow();
@@ -403,7 +400,7 @@
       sections.push({label:s.querySelector('.sec-label').value.trim()||'Section',fields});
     });
     return {
-      person:{name:v('f-name'),callsign:v('f-callsign')},
+      person:{name:v('f-name')},
       ice, status:{location:v('f-location'),updated:v('f-updated'),plan:v('f-plan')},
       trail:trail.length?trail:[{date:'–',place:'No entries yet'}],
       sections

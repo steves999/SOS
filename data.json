@@ -1,7 +1,6 @@
 {
   "person": {
-    "name": "Steve Gore-Smith",
-    "callsign": "ZL1SGS"
+    "name": "Steve Gore-Smith"
   },
   "ice": [
     {
@@ -20,7 +19,7 @@
   },
   "trail": [
     {
-      "date": "â",
+      "date": "–",
       "place": "No entries yet"
     }
   ],

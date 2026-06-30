@@ -68,8 +68,7 @@
 <body>
 <header class="site-header">
   <div>
-    <div class="callsign" id="h-callsign">ZL1SGS</div>
-    <div class="header-sub">Amateur Radio · ADV Touring · New Zealand</div>
+    <div class="callsign" id="h-callsign">Emergency Information</div>
   </div>
   <div class="sos-badge">EMERGENCY INFO</div>
 </header>
@@ -89,8 +88,8 @@ fetch('data.json?v=' + Date.now())
 
     // Header
     if (d.person) {
-      document.getElementById('h-callsign').textContent = d.person.callsign + (d.person.name ? ' · ' + d.person.name : '');
-      document.getElementById('footer').textContent = (d.person.callsign || '') + (d.person.name ? ' · ' + d.person.name : '') + ' · New Zealand';
+      document.getElementById('h-callsign').textContent = d.person.name || 'Emergency Information';
+      document.getElementById('footer').textContent = d.person.name || 'Emergency Information';
     }
 
     // ── TOURING STATUS (always first) ──
