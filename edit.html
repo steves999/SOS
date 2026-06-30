@@ -212,7 +212,7 @@
   const GITHUB_REPO   = 'SOS';
   const GITHUB_FILE   = 'data.json';
   const GITHUB_BRANCH = 'main';
-  const EDITOR_PASSWORD = 'puffinkayak'; // ← change before deploying
+  const EDITOR_PASSWORD = 'changeme'; // ← change before deploying
 
   let currentSha = null;
   let rowCount = 0;
@@ -303,6 +303,8 @@
       <div class="row2">
         <div class="field"><label>Location</label><input type="text" class="ic-loc" value="${esc(c.location||'')}"></div>
         <div class="field"><label>Phone (intl format)</label><input type="text" class="ic-phone" value="${esc(c.phone||'')}" placeholder="+64XXXXXXXXX"></div>
+      </div>
+      <div class="field"><label>Email</label><input type="text" class="ic-email" value="${esc(c.email||'')}" placeholder="email@example.com"></div>
       </div>`;
     document.getElementById('ice-blocks').appendChild(div);
   }
@@ -387,7 +389,7 @@
     });
     const ice=[];
     document.querySelectorAll('.ice-block').forEach((b,i)=>{
-      ice.push({label:'ICE '+(i+1),name:b.querySelector('.ic-name').value.trim(),relationship:b.querySelector('.ic-rel').value.trim(),location:b.querySelector('.ic-loc').value.trim(),phone:b.querySelector('.ic-phone').value.trim()});
+      ice.push({label:'ICE '+(i+1),name:b.querySelector('.ic-name').value.trim(),relationship:b.querySelector('.ic-rel').value.trim(),location:b.querySelector('.ic-loc').value.trim(),phone:b.querySelector('.ic-phone').value.trim(),email:b.querySelector('.ic-email').value.trim()});
     });
     const sections=[];
     document.querySelectorAll('.dyn-section').forEach(s=>{
