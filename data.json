@@ -6,19 +6,11 @@
   "ice": [
     {
       "label": "ICE 1",
-      "name": "[Name]",
-      "relationship": "[Relationship]",
-      "location": "[City, Country]",
-      "phone": "+64XXXXXXXXX",
-      "email": ""
-    },
-    {
-      "label": "ICE 2",
-      "name": "[Name]",
-      "relationship": "[Relationship]",
-      "location": "[City, Country]",
-      "phone": "+64XXXXXXXXX",
-      "email": ""
+      "name": "Cate Ryan",
+      "relationship": "Spouse",
+      "location": "Auckland, NZ",
+      "phone": "+64 210 824 9187",
+      "email": "cate_is@yahoo.com"
     }
   ],
   "status": {
@@ -27,34 +19,74 @@
     "plan": "Trip not yet started. Departing late 2026 for Australia ADV tour."
   },
   "trail": [
-    { "date": "–", "place": "No entries yet" }
+    {
+      "date": "â",
+      "place": "No entries yet"
+    }
   ],
   "sections": [
     {
       "label": "Medical",
       "fields": [
-        { "label": "Blood Type", "value": "[YOUR BLOOD TYPE]", "highlight": true },
-        { "label": "Allergies", "value": "None known" },
-        { "label": "Medications", "value": "None" },
-        { "label": "Conditions", "value": "None" },
-        { "label": "Diet", "value": "Vegan — no animal products in treatment" }
+        {
+          "label": "Blood Type",
+          "value": "[YOUR BLOOD TYPE]",
+          "highlight": true
+        },
+        {
+          "label": "Allergies",
+          "value": "None known"
+        },
+        {
+          "label": "Medications",
+          "value": "None"
+        },
+        {
+          "label": "Conditions",
+          "value": "None"
+        },
+        {
+          "label": "Diet",
+          "value": "Vegan â no animal products in treatment"
+        }
       ]
     },
     {
       "label": "Vehicle",
       "fields": [
-        { "label": "Motorcycle", "value": "BMW R1250GSA" },
-        { "label": "Colour", "value": "[Colour]" },
-        { "label": "Registration", "value": "[PLATE]" },
-        { "label": "Insurer", "value": "[INSURER]" },
-        { "label": "Policy", "value": "[NUMBER]" }
+        {
+          "label": "Motorcycle",
+          "value": "BMW R1250GSA"
+        },
+        {
+          "label": "Colour",
+          "value": "[Colour]"
+        },
+        {
+          "label": "Registration",
+          "value": "[PLATE]"
+        },
+        {
+          "label": "Insurer",
+          "value": "[INSURER]"
+        },
+        {
+          "label": "Policy",
+          "value": "[NUMBER]"
+        }
       ]
     },
     {
       "label": "Personal",
       "fields": [
-        { "label": "Date of Birth", "value": "[DD MMM YYYY]" },
-        { "label": "Nationality", "value": "British / New Zealand" }
+        {
+          "label": "Date of Birth",
+          "value": "[DD MMM YYYY]"
+        },
+        {
+          "label": "Nationality",
+          "value": "British / New Zealand"
+        }
       ]
     }
   ]
