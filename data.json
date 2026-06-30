@@ -55,19 +55,19 @@
       "fields": [
         {
           "label": "Motorcycle",
-          "value": "BMW R1250GSA"
+          "value": "BMW R1200GS"
         },
         {
           "label": "Colour",
-          "value": "[Colour]"
+          "value": "Yellow"
         },
         {
           "label": "Registration",
-          "value": "[PLATE]"
+          "value": "55YMQ"
         },
         {
           "label": "Insurer",
-          "value": "[INSURER]"
+          "value": "Star"
         },
         {
           "label": "Policy",
