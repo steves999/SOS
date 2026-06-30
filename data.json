@@ -20,7 +20,7 @@
   },
   "trail": [
     {
-      "date": "–",
+      "date": "â",
       "place": "No entries yet"
     }
   ],
@@ -90,19 +90,14 @@
       ]
     },
     {
-      "label": "NEW SECTION",
+      "label": "PASSPORT",
       "fields": [
         {
           "label": "UK passport",
           "value": "548455306"
-        }
-      ]
-    },
-    {
-      "label": "NEW SECTION",
-      "fields": [
+        },
         {
-          "label": "NZ passport",
+          "label": "NZ Passport",
           "value": ""
         }
       ]
