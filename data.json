@@ -1,6 +1,6 @@
 {
   "person": {
-    "name": "[YOUR FULL NAME]",
+    "name": "Steve Gore-Smith",
     "callsign": "ZL1SGS"
   },
   "ice": [
@@ -30,12 +30,12 @@
       "fields": [
         {
           "label": "Blood Type",
-          "value": "[YOUR BLOOD TYPE]",
+          "value": "O+",
           "highlight": true
         },
         {
           "label": "Allergies",
-          "value": "None known"
+          "value": "Penicillin"
         },
         {
           "label": "Medications",
@@ -47,7 +47,7 @@
         },
         {
           "label": "Diet",
-          "value": "Vegan Ã¢ÂÂ no animal products in treatment"
+          "value": "Vegan - prefer no animal products in treatment"
         }
       ]
     },
@@ -56,15 +56,15 @@
       "fields": [
         {
           "label": "Motorcycle",
-          "value": "BMW R1250GSA"
+          "value": "BMW R1200GS"
         },
         {
           "label": "Colour",
-          "value": "[Colour]"
+          "value": "Yellow"
         },
         {
           "label": "Registration",
-          "value": "[PLATE]"
+          "value": "%%YMQ"
         },
         {
           "label": "Insurer",
@@ -81,7 +81,7 @@
       "fields": [
         {
           "label": "Date of Birth",
-          "value": "[DD MMM YYYY]"
+          "value": "02 OCTOBER 1963"
         },
         {
           "label": "Nationality",
